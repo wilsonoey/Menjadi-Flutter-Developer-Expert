@@ -1,0 +1,53 @@
+{
+  "backdrop_path": "/suopoADq0k8YZr4dQXcU6pToj6s.jpg",
+  "episode_run_time": [60],
+  "first_air_date": "2011-04-17",
+  "genres": [
+    {
+      "id": 10765,
+      "name": "Sci-Fi & Fantasy"
+    },
+    {
+      "id": 10759,
+      "name": "Action & Adventure"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "id": 1399,
+  "last_air_date": "2019-05-19",
+  "name": "Game of Thrones",
+  "number_of_episodes": 73,
+  "number_of_seasons": 8,
+  "original_name": "Game of Thrones",
+  "overview": "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond.",
+  "popularity": 346.098,
+  "poster_path": "/jIhL6mlT7AblhbHJgEoiBIOUVl1.jpg",
+  "seasons": [
+    {
+      "air_date": "2010-12-05",
+      "episode_count": 64,
+      "id": 3627,
+      "name": "Specials",
+      "overview": "",
+      "poster_path": "/kMTcwNRfFKCZ0O2OaBZS0nZ2AIe.jpg",
+      "season_number": 0
+    },
+    {
+      "air_date": "2011-04-17",
+      "episode_count": 10,
+      "id": 3624,
+      "name": "Season 1",
+      "overview": "Trouble is brewing in the Seven Kingdoms of Westeros. For the driven inhabitants of this visionary world, control of Westeros' Iron Throne holds the lure of great power. But in a land where the seasons can last a lifetime, winter is coming...and beyond the Great Wall that protects them, an ancient evil has returned. In Season One, the story centers on three primary areas: the dynastic struggle among several families for control of Westeros, the rising threat of the largely forgotten race of fantastic creatures that live beyond Westeros' northern borders, and the ambition of an exiled heir to the throne.",
+      "poster_path": "/zwaj4egrhnXOBIit1tyb4Sbt3KP.jpg",
+      "season_number": 1
+    }
+  ],
+  "status": "Ended",
+  "tagline": "Winter Is Coming",
+  "type": "Scripted",
+  "vote_average": 8.3,
+  "vote_count": 11504
+}

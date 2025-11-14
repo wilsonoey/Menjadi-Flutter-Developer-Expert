@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "93076207620",
+    "project_id": "food-flutterml-dicoding",
+    "storage_bucket": "food-flutterml-dicoding.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93076207620:android:c831c09cbd72412c05dd51",
+        "android_client_info": {
+          "package_name": "com.dicoding.flutter.u758.submission"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQmPMukC3yT2n3W24LfTIjRAFXfZNkH7A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93076207620:android:4d066f858deae50e05dd51",
+        "android_client_info": {
+          "package_name": "com.example.flutter_expert_dicoding"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQmPMukC3yT2n3W24LfTIjRAFXfZNkH7A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
