@@ -47,7 +47,7 @@ void main() async {
   // Initialize dependency injection first
   di.init();
 
-  // Wait for all async singletons to be ready
+  // Wait for all async singletons to be ready (including SslPinning)
   await di.locator.allReady();
 
   await Firebase.initializeApp(
@@ -64,22 +64,7 @@ void main() async {
     return true;
   };
   
-  // Initialize SSL Pinning
-  await _installSslPinning();
-  
   runApp(MyApp());
-}
-
-Future<void> _installSslPinning() async {
-  try {
-    // Get the SslPinning instance from GetIt instead of creating a new one
-    await di.locator<SslPinning>().init();
-    print('SSL pinning initialized successfully');
-  } catch (e, stackTrace) {
-    print('SSL pinning install failed: $e');
-    print('Stack trace: $stackTrace');
-    // We don't rethrow here to allow the app to run without pinning if it fails
-  }
 }
 
 class MyApp extends StatelessWidget {

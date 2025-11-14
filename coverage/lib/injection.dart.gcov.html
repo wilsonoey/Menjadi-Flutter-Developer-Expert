@@ -31,13 +31,13 @@
             <td class="headerValue">test.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">66</td>
-            <td class="headerCovTableEntry">66</td>
+            <td class="headerCovTableEntry">70</td>
+            <td class="headerCovTableEntry">70</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2025-11-14 07:46:04</td>
+            <td class="headerValue">2025-11-14 21:13:47</td>
             <td></td>
           </tr>
           <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
@@ -178,22 +178,29 @@
 <a name="120"><span class="lineNum">     120 </span><span class="lineCov">          4 :   locator.registerLazySingleton&lt;DatabaseHelper&gt;(() =&gt; DatabaseHelper());</span></a>
 <a name="121"><span class="lineNum">     121 </span>            : </a>
 <a name="122"><span class="lineNum">     122 </span>            :   // External</a>
-<a name="123"><span class="lineNum">     123 </span>            :   // Daftarkan http.Client secara asinkron dan daftarkan dependensi lain setelahnya</a>
-<a name="124"><span class="lineNum">     124 </span><span class="lineCov">          3 :   locator.registerSingletonAsync&lt;http.Client&gt;(() async {</span></a>
+<a name="123"><span class="lineNum">     123 </span>            :   // Register SslPinning as singleton first</a>
+<a name="124"><span class="lineNum">     124 </span><span class="lineCov">          3 :   locator.registerSingletonAsync&lt;SslPinning&gt;(() async {</span></a>
 <a name="125"><span class="lineNum">     125 </span><span class="lineCov">          1 :     final sslPinning = SslPinning();</span></a>
-<a name="126"><span class="lineNum">     126 </span><span class="lineCov">          1 :     return await sslPinning.getClient();</span></a>
-<a name="127"><span class="lineNum">     127 </span>            :   });</a>
-<a name="128"><span class="lineNum">     128 </span>            : </a>
-<a name="129"><span class="lineNum">     129 </span>            :   // Daftarkan remote data sources setelah http.Client siap menggunakan dependensi</a>
-<a name="130"><span class="lineNum">     130 </span><span class="lineCov">          2 :   locator.registerSingletonWithDependencies&lt;MovieRemoteDataSource&gt;(</span></a>
-<a name="131"><span class="lineNum">     131 </span><span class="lineCov">          4 :     () =&gt; MovieRemoteDataSourceImpl(client: locator()),</span></a>
-<a name="132"><span class="lineNum">     132 </span><span class="lineCov">          1 :     dependsOn: [http.Client],</span></a>
-<a name="133"><span class="lineNum">     133 </span>            :   );</a>
-<a name="134"><span class="lineNum">     134 </span><span class="lineCov">          2 :   locator.registerSingletonWithDependencies&lt;TVSeriesRemoteDataSource&gt;(</span></a>
-<a name="135"><span class="lineNum">     135 </span><span class="lineCov">          4 :     () =&gt; TVSeriesRemoteDataSourceImpl(client: locator()),</span></a>
-<a name="136"><span class="lineNum">     136 </span><span class="lineCov">          1 :     dependsOn: [http.Client],</span></a>
-<a name="137"><span class="lineNum">     137 </span>            :   );</a>
-<a name="138"><span class="lineNum">     138 </span>            : }</a>
+<a name="126"><span class="lineNum">     126 </span><span class="lineCov">          1 :     await sslPinning.init();</span></a>
+<a name="127"><span class="lineNum">     127 </span>            :     return sslPinning;</a>
+<a name="128"><span class="lineNum">     128 </span>            :   });</a>
+<a name="129"><span class="lineNum">     129 </span>            : </a>
+<a name="130"><span class="lineNum">     130 </span>            :   // Register http.Client using SslPinning</a>
+<a name="131"><span class="lineNum">     131 </span><span class="lineCov">          3 :   locator.registerSingletonAsync&lt;http.Client&gt;(() async {</span></a>
+<a name="132"><span class="lineNum">     132 </span><span class="lineCov">          2 :     final sslPinning = await locator.getAsync&lt;SslPinning&gt;();</span></a>
+<a name="133"><span class="lineNum">     133 </span><span class="lineCov">          1 :     return await sslPinning.getClient();</span></a>
+<a name="134"><span class="lineNum">     134 </span><span class="lineCov">          1 :   }, dependsOn: [SslPinning]);</span></a>
+<a name="135"><span class="lineNum">     135 </span>            : </a>
+<a name="136"><span class="lineNum">     136 </span>            :   // Daftarkan remote data sources setelah http.Client siap menggunakan dependensi</a>
+<a name="137"><span class="lineNum">     137 </span><span class="lineCov">          2 :   locator.registerSingletonWithDependencies&lt;MovieRemoteDataSource&gt;(</span></a>
+<a name="138"><span class="lineNum">     138 </span><span class="lineCov">          4 :     () =&gt; MovieRemoteDataSourceImpl(client: locator()),</span></a>
+<a name="139"><span class="lineNum">     139 </span><span class="lineCov">          1 :     dependsOn: [http.Client],</span></a>
+<a name="140"><span class="lineNum">     140 </span>            :   );</a>
+<a name="141"><span class="lineNum">     141 </span><span class="lineCov">          2 :   locator.registerSingletonWithDependencies&lt;TVSeriesRemoteDataSource&gt;(</span></a>
+<a name="142"><span class="lineNum">     142 </span><span class="lineCov">          4 :     () =&gt; TVSeriesRemoteDataSourceImpl(client: locator()),</span></a>
+<a name="143"><span class="lineNum">     143 </span><span class="lineCov">          1 :     dependsOn: [http.Client],</span></a>
+<a name="144"><span class="lineNum">     144 </span>            :   );</a>
+<a name="145"><span class="lineNum">     145 </span>            : }</a>
 </pre>
       </td>
     </tr>

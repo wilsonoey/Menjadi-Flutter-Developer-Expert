@@ -4,7 +4,6 @@ import 'package:ditonton/domain/entities/movie/genre.dart';
 import 'package:ditonton/domain/entities/movie/movie_detail.dart';
 import 'package:ditonton/presentation/bloc/movie/movie_detail/movie_detail_bloc.dart';
 import 'package:ditonton/presentation/bloc/movie/movie_recommendations/movie_recommendations_bloc.dart';
-// import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
