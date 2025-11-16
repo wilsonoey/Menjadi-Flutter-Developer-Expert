@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutter_expert_dicoding">
+    package="com.example.ditonton">
    <application
-        android:label="flutter_expert_dicoding"
+        android:label="Ditonton"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

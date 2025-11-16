@@ -33,6 +33,7 @@ import 'package:ditonton/presentation/pages/tv/search_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/tv/top_rated_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/tv/tv_series_detail_page.dart';
 import 'package:ditonton/presentation/pages/tv/watchlist_tv_series_page.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/cupertino.dart';
@@ -47,7 +48,7 @@ void main() async {
   // Initialize dependency injection first
   di.init();
 
-  // Wait for all async singletons to be ready (including SslPinning)
+  // Wait for all async singletons to be ready
   await di.locator.allReady();
 
   await Firebase.initializeApp(
@@ -64,7 +65,24 @@ void main() async {
     return true;
   };
   
+  // Initialize SSL Pinning
+  await _installSslPinning();
+
+  FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(true);
+  
   runApp(MyApp());
+}
+
+Future<void> _installSslPinning() async {
+  try {
+    // Get the SslPinning instance from GetIt instead of creating a new one
+    await di.locator<SslPinning>().init();
+    print('SSL pinning initialized successfully');
+  } catch (e, stackTrace) {
+    print('SSL pinning install failed: $e');
+    print('Stack trace: $stackTrace');
+    // We don't rethrow here to allow the app to run without pinning if it fails
+  }
 }
 
 class MyApp extends StatelessWidget {

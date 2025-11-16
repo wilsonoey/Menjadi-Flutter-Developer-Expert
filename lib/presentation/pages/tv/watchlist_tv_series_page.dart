@@ -17,6 +17,8 @@ class _WatchlistTVSeriesPageState extends State<WatchlistTVSeriesPage>
   void didChangeDependencies() {
     super.didChangeDependencies();
     routeObserver.subscribe(this, ModalRoute.of(context)!);
+    BlocProvider.of<WatchlistTvSeriesBloc>(context, listen: false)
+      ..add(FetchWatchlistTvSeries());
   }
 
   void didPopNext() {

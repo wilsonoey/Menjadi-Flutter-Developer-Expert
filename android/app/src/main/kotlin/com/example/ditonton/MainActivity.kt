@@ -1,4 +1,4 @@
-package com.example.flutter_expert_dicoding
+package com.example.ditonton
 
 import io.flutter.embedding.android.FlutterActivity
 

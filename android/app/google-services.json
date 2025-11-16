@@ -26,9 +26,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:93076207620:android:4d066f858deae50e05dd51",
+        "mobilesdk_app_id": "1:93076207620:android:109d2d6abce49df305dd51",
         "android_client_info": {
-          "package_name": "com.example.flutter_expert_dicoding"
+          "package_name": "com.example.ditonton"
         }
       },
       "oauth_client": [],

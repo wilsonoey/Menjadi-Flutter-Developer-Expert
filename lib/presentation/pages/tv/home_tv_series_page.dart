@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
+import 'package:ditonton/common/firebase_analytics_service.dart';
 import 'package:ditonton/domain/entities/tv/tv_series.dart';
 import 'package:ditonton/presentation/bloc/tv/on_the_air_tv_series/on_the_air_tv_series_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv/popular_tv_series/popular_tv_series_bloc.dart';
@@ -23,9 +24,12 @@ class HomeTVSeriesPage extends StatefulWidget {
 }
 
 class _HomeTVSeriesPageState extends State<HomeTVSeriesPage> {
+  final _analyticsService = FirebaseAnalyticsService();
+
   @override
   void initState() {
     super.initState();
+    _analyticsService.logScreenView(screenName: 'Home TV Series Page');
     Future.microtask(() {
       context.read<OnTheAirTvSeriesBloc>().add(FetchOnTheAirTvSeries());
       context.read<PopularTvSeriesBloc>().add(FetchPopularTvSeries());
@@ -169,6 +173,7 @@ class _HomeTVSeriesPageState extends State<HomeTVSeriesPage> {
 
 class TVSeriesList extends StatelessWidget {
   final List<TVSeries> tvSeries;
+  final _analyticsService = FirebaseAnalyticsService();
 
   TVSeriesList(this.tvSeries);
 
@@ -184,6 +189,8 @@ class TVSeriesList extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             child: InkWell(
               onTap: () {
+                // Log movie click event
+                _analyticsService.logTVSeriesDetailView(tvSeriesId: tv.id);
                 Navigator.pushNamed(
                   context,
                   TVSeriesDetailPage.ROUTE_NAME,

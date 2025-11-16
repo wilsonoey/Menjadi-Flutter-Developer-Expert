@@ -21,7 +21,7 @@ class SslPinning {
     try {
       _httpClient = HttpClient(context: await globalContext);
       _httpClient!.badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
+          (X509Certificate cert, String host, int port) => false;
       _client = IOClient(_httpClient!);
     } catch (e) {
       print('Error initializing SSL pinning: $e');

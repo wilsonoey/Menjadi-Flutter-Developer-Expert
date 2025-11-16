@@ -120,18 +120,11 @@ void init() {
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
 
   // External
-  // Register SslPinning as singleton first
-  locator.registerSingletonAsync<SslPinning>(() async {
-    final sslPinning = SslPinning();
-    await sslPinning.init();
-    return sslPinning;
-  });
-
-  // Register http.Client using SslPinning
+  // Daftarkan http.Client secara asinkron dan daftarkan dependensi lain setelahnya
   locator.registerSingletonAsync<http.Client>(() async {
-    final sslPinning = await locator.getAsync<SslPinning>();
+    final sslPinning = SslPinning();
     return await sslPinning.getClient();
-  }, dependsOn: [SslPinning]);
+  });
 
   // Daftarkan remote data sources setelah http.Client siap menggunakan dependensi
   locator.registerSingletonWithDependencies<MovieRemoteDataSource>(

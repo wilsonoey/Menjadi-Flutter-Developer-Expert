@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
+import 'package:ditonton/common/firebase_analytics_service.dart';
 import 'package:ditonton/domain/entities/movie/movie.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/tv/home_tv_series_page.dart';
@@ -24,9 +25,14 @@ class HomeMoviePage extends StatefulWidget {
 }
 
 class _HomeMoviePageState extends State<HomeMoviePage> {
+  final _analyticsService = FirebaseAnalyticsService();
+
   @override
   void initState() {
     super.initState();
+    // Log screen view when page is loaded
+    _analyticsService.logScreenView(screenName: 'Home Movie Page');
+    
     Future.microtask(() {
       context.read<NowPlayingMoviesBloc>().add(FetchNowPlayingMovies());
       context.read<PopularMoviesBloc>().add(FetchPopularMovies());
@@ -162,6 +168,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
 
 class MovieList extends StatelessWidget {
   final List<Movie> movies;
+  final _analyticsService = FirebaseAnalyticsService();
 
   MovieList(this.movies);
 
@@ -177,6 +184,9 @@ class MovieList extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             child: InkWell(
               onTap: () {
+                // Log movie click event
+                _analyticsService.logMovieDetailView(movieId: movie.id);
+                
                 Navigator.pushNamed(
                   context,
                   MovieDetailPage.ROUTE_NAME,
