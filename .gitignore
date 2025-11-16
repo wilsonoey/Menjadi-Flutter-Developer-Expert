@@ -45,3 +45,4 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 /failed_tests_output
+log_test.txt
