@@ -19,6 +19,8 @@ import 'package:ditonton/presentation/bloc/movie/top_rated_movies/top_rated_movi
 
 class HomeMoviePage extends StatefulWidget {
   static const ROUTE_NAME = '/home';
+
+  const HomeMoviePage({super.key});
   @override
   _HomeMoviePageState createState() => _HomeMoviePageState();
 }
@@ -42,32 +44,32 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
           children: [
             UserAccountsDrawerHeader(
               currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('assets/circle-g.png'),
+                backgroundImage: const AssetImage('assets/circle-g.png'),
                 backgroundColor: Colors.grey.shade900,
               ),
-              accountName: Text('Ditonton'),
-              accountEmail: Text('ditonton@dicoding.com'),
+              accountName: const Text('Ditonton'),
+              accountEmail: const Text('ditonton@dicoding.com'),
               decoration: BoxDecoration(
                 color: Colors.grey.shade900,
               ),
             ),
             ListTile(
-              leading: Icon(Icons.movie),
-              title: Text('Movies'),
+              leading: const Icon(Icons.movie),
+              title: const Text('Movies'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: Icon(Icons.tv),
-              title: Text('TV Series'),
+              leading: const Icon(Icons.tv),
+              title: const Text('TV Series'),
               onTap: () {
                 Navigator.pushNamed(context, HomeTVSeriesPage.ROUTE_NAME);
               },
             ),
             ListTile(
-              leading: Icon(Icons.save_alt),
-              title: Text('Watchlist'),
+              leading: const Icon(Icons.save_alt),
+              title: const Text('Watchlist'),
               onTap: () {
                 Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
               },
@@ -76,20 +78,20 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               onTap: () {
                 Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
               },
-              leading: Icon(Icons.info_outline),
-              title: Text('About'),
+              leading: const Icon(Icons.info_outline),
+              title: const Text('About'),
             ),
           ],
         ),
       ),
       appBar: AppBar(
-        title: Text('Ditonton'),
+        title: const Text('Ditonton'),
         actions: [
           IconButton(
             onPressed: () {
               Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
             },
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
           )
         ],
       ),
@@ -106,13 +108,13 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               BlocBuilder<NowPlayingMoviesBloc, NowPlayingMoviesState>(
                 builder: (_, state) {
                   if (state is NowPlayingMoviesLoading) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   } else if (state is NowPlayingMoviesLoaded) {
                     return MovieList(state.movies);
                   } else if (state is NowPlayingMoviesError) {
                     return Text(state.message);
                   } else {
-                    return SizedBox.shrink();
+                    return const SizedBox.shrink();
                   }
                 },
               ),
@@ -124,13 +126,13 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               BlocBuilder<PopularMoviesBloc, PopularMoviesState>(
                 builder: (_, state) {
                   if (state is PopularMoviesLoading) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   } else if (state is PopularMoviesLoaded) {
                     return MovieList(state.movies);
                   } else if (state is PopularMoviesError) {
                     return Text(state.message);
                   } else {
-                    return SizedBox.shrink();
+                    return const SizedBox.shrink();
                   }
                 },
               ),
@@ -142,13 +144,13 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               BlocBuilder<TopRatedMoviesBloc, TopRatedMoviesState>(
                 builder: (_, state) {
                   if (state is TopRatedMoviesLoading) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   } else if (state is TopRatedMoviesLoaded) {
                     return MovieList(state.movies);
                   } else if (state is TopRatedMoviesError) {
                     return Text(state.message);
                   } else {
-                    return SizedBox.shrink();
+                    return const SizedBox.shrink();
                   }
                 },
               ),
@@ -163,11 +165,11 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
 class MovieList extends StatelessWidget {
   final List<Movie> movies;
 
-  MovieList(this.movies);
+  const MovieList(this.movies, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 200,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -184,13 +186,13 @@ class MovieList extends StatelessWidget {
                 );
               },
               child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
                   imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
-                  placeholder: (context, url) => Center(
+                  placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),
                   ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
             ),

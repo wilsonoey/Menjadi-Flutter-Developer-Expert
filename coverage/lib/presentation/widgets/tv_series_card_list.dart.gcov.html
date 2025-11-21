@@ -31,13 +31,13 @@
             <td class="headerValue">test.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">26</td>
-            <td class="headerCovTableEntry">26</td>
+            <td class="headerCovTableEntry">23</td>
+            <td class="headerCovTableEntry">23</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2025-11-16 15:44:48</td>
+            <td class="headerValue">2025-11-21 14:52:37</td>
             <td></td>
           </tr>
           <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -65,7 +65,7 @@
 <a name="7"><span class="lineNum">       7 </span>            : class TVSeriesCard extends StatelessWidget {</a>
 <a name="8"><span class="lineNum">       8 </span>            :   final TVSeries tvSeries;</a>
 <a name="9"><span class="lineNum">       9 </span>            : </a>
-<a name="10"><span class="lineNum">      10 </span><span class="lineCov">          6 :   TVSeriesCard(this.tvSeries);</span></a>
+<a name="10"><span class="lineNum">      10 </span><span class="lineCov">          6 :   const TVSeriesCard(this.tvSeries, {super.key});</span></a>
 <a name="11"><span class="lineNum">      11 </span>            : </a>
 <a name="12"><span class="lineNum">      12 </span><span class="lineCov">          6 :   @override</span></a>
 <a name="13"><span class="lineNum">      13 </span>            :   Widget build(BuildContext context) {</a>
@@ -98,7 +98,7 @@
 <a name="40"><span class="lineNum">      40 </span>            :                       overflow: TextOverflow.ellipsis,</a>
 <a name="41"><span class="lineNum">      41 </span><span class="lineCov">          6 :                       style: heading6,</span></a>
 <a name="42"><span class="lineNum">      42 </span>            :                     ),</a>
-<a name="43"><span class="lineNum">      43 </span><span class="lineCov">          6 :                     SizedBox(height: 16),</span></a>
+<a name="43"><span class="lineNum">      43 </span>            :                     const SizedBox(height: 16),</a>
 <a name="44"><span class="lineNum">      44 </span><span class="lineCov">          6 :                     Text(</span></a>
 <a name="45"><span class="lineNum">      45 </span><span class="lineCov">         12 :                       tvSeries.overview ?? '-',</span></a>
 <a name="46"><span class="lineNum">      46 </span>            :                       maxLines: 2,</a>
@@ -114,14 +114,14 @@
 <a name="56"><span class="lineNum">      56 </span>            :                 bottom: 16,</a>
 <a name="57"><span class="lineNum">      57 </span>            :               ),</a>
 <a name="58"><span class="lineNum">      58 </span><span class="lineCov">          6 :               child: ClipRRect(</span></a>
-<a name="59"><span class="lineNum">      59 </span><span class="lineCov">          6 :                 child: CachedNetworkImage(</span></a>
-<a name="60"><span class="lineNum">      60 </span><span class="lineCov">         18 :                   imageUrl: '$BASE_IMAGE_URL${tvSeries.posterPath}',</span></a>
-<a name="61"><span class="lineNum">      61 </span>            :                   width: 80,</a>
-<a name="62"><span class="lineNum">      62 </span><span class="lineCov">         12 :                   placeholder: (context, url) =&gt; Center(</span></a>
-<a name="63"><span class="lineNum">      63 </span><span class="lineCov">          6 :                     child: CircularProgressIndicator(),</span></a>
-<a name="64"><span class="lineNum">      64 </span>            :                   ),</a>
-<a name="65"><span class="lineNum">      65 </span>            :                 ),</a>
-<a name="66"><span class="lineNum">      66 </span><span class="lineCov">         12 :                 borderRadius: BorderRadius.all(Radius.circular(8)),</span></a>
+<a name="59"><span class="lineNum">      59 </span>            :                 borderRadius: const BorderRadius.all(Radius.circular(8)),</a>
+<a name="60"><span class="lineNum">      60 </span><span class="lineCov">          6 :                 child: CachedNetworkImage(</span></a>
+<a name="61"><span class="lineNum">      61 </span><span class="lineCov">         18 :                   imageUrl: '$BASE_IMAGE_URL${tvSeries.posterPath}',</span></a>
+<a name="62"><span class="lineNum">      62 </span>            :                   width: 80,</a>
+<a name="63"><span class="lineNum">      63 </span><span class="lineCov">          6 :                   placeholder: (context, url) =&gt; const Center(</span></a>
+<a name="64"><span class="lineNum">      64 </span>            :                     child: CircularProgressIndicator(),</a>
+<a name="65"><span class="lineNum">      65 </span>            :                   ),</a>
+<a name="66"><span class="lineNum">      66 </span>            :                 ),</a>
 <a name="67"><span class="lineNum">      67 </span>            :               ),</a>
 <a name="68"><span class="lineNum">      68 </span>            :             ),</a>
 <a name="69"><span class="lineNum">      69 </span>            :           ],</a>

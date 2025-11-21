@@ -48,13 +48,13 @@ void main() {
     'Should emit [Loading, Error] when get data is unsuccessful',
     build: () {
       when(mockGetPopularMovies.execute())
-          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       return popularMoviesBloc;
     },
     act: (bloc) => bloc.add(FetchPopularMovies()),
     expect: () => [
       PopularMoviesLoading(),
-      PopularMoviesError('Server Failure'),
+      const PopularMoviesError('Server Failure'),
     ],
     verify: (_) {
       verify(mockGetPopularMovies.execute());
@@ -65,13 +65,13 @@ void main() {
     'Should emit [Loading, Error] when connection failure',
     build: () {
       when(mockGetPopularMovies.execute())
-          .thenAnswer((_) async => Left(ConnectionFailure('Failed to connect')));
+          .thenAnswer((_) async => const Left(ConnectionFailure('Failed to connect')));
       return popularMoviesBloc;
     },
     act: (bloc) => bloc.add(FetchPopularMovies()),
     expect: () => [
       PopularMoviesLoading(),
-      PopularMoviesError('Failed to connect'),
+      const PopularMoviesError('Failed to connect'),
     ],
   );
 
@@ -79,13 +79,13 @@ void main() {
     'Should emit [Loading, Error] when SSL failure',
     build: () {
       when(mockGetPopularMovies.execute())
-          .thenAnswer((_) async => Left(SSLFailure('Certificate verification failed')));
+          .thenAnswer((_) async => const Left(SSLFailure('Certificate verification failed')));
       return popularMoviesBloc;
     },
     act: (bloc) => bloc.add(FetchPopularMovies()),
     expect: () => [
       PopularMoviesLoading(),
-      PopularMoviesError('Certificate verification failed'),
+      const PopularMoviesError('Certificate verification failed'),
     ],
   );
 
@@ -93,13 +93,13 @@ void main() {
     'Should emit [Loading, Loaded] with empty list when data is empty',
     build: () {
       when(mockGetPopularMovies.execute())
-          .thenAnswer((_) async => Right([]));
+          .thenAnswer((_) async => const Right([]));
       return popularMoviesBloc;
     },
     act: (bloc) => bloc.add(FetchPopularMovies()),
     expect: () => [
       PopularMoviesLoading(),
-      PopularMoviesLoaded([]),
+      const PopularMoviesLoaded([]),
     ],
   );
 }

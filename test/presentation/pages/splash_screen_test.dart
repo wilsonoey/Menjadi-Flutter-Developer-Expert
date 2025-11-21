@@ -4,7 +4,7 @@ import 'package:ditonton/presentation/pages/splash_page.dart';
 import 'package:ditonton/presentation/pages/movie/home_movie_page.dart';
 
 void main() {
-  Widget _makeTestableWidget(Widget body) {
+  Widget makeTestableWidget(Widget body) {
     return MaterialApp(
       home: body,
       routes: {
@@ -17,7 +17,7 @@ void main() {
   
   testWidgets('SplashPage should navigate after delay', (WidgetTester tester) async {
     await tester.pumpWidget(
-      _makeTestableWidget(const SplashPage()),
+      makeTestableWidget(const SplashPage()),
     );
 
     // Verify splash page displays

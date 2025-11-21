@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final testTVSeries = TVSeries(
+  final testTVSeries = const TVSeries(
     backdropPath: '/backdrop.jpg',
     genreIds: [1, 2],
     id: 123,
@@ -20,15 +20,15 @@ void main() {
     voteCount: 100,
   );
 
-  Widget _makeTestableWidget(Widget body) {
+  Widget makeTestableWidget(Widget body) {
     return MaterialApp(
       home: Scaffold(body: body),
       onGenerateRoute: (settings) {
         if (settings.name == '/detail-tv-series') {
           return MaterialPageRoute(
             builder: (_) => Scaffold(
-              appBar: AppBar(title: Text('Detail')),
-              body: Center(child: Text('TV Series Detail')),
+              appBar: AppBar(title: const Text('Detail')),
+              body: const Center(child: Text('TV Series Detail')),
             ),
           );
         }
@@ -39,20 +39,20 @@ void main() {
 
   group('TVSeriesCard', () {
     testWidgets('displays series name correctly', (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(TVSeriesCard(testTVSeries)));
+      await tester.pumpWidget(makeTestableWidget(TVSeriesCard(testTVSeries)));
 
       expect(find.text('Test Series'), findsOneWidget);
     });
 
     testWidgets('displays series overview correctly', (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(TVSeriesCard(testTVSeries)));
+      await tester.pumpWidget(makeTestableWidget(TVSeriesCard(testTVSeries)));
 
       expect(find.text('Great series overview'), findsOneWidget);
     });
 
     testWidgets('displays poster image with correct URL',
         (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(TVSeriesCard(testTVSeries)));
+      await tester.pumpWidget(makeTestableWidget(TVSeriesCard(testTVSeries)));
 
       expect(
         find.byWidgetPredicate(
@@ -65,7 +65,7 @@ void main() {
     });
 
     testWidgets('navigates to detail page when tapped', (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(TVSeriesCard(testTVSeries)));
+      await tester.pumpWidget(makeTestableWidget(TVSeriesCard(testTVSeries)));
 
       await tester.tap(find.byType(InkWell));
       await tester.pumpAndSettle();
@@ -74,13 +74,13 @@ void main() {
     });
 
     testWidgets('renders Card widget', (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(TVSeriesCard(testTVSeries)));
+      await tester.pumpWidget(makeTestableWidget(TVSeriesCard(testTVSeries)));
 
       expect(find.byType(Card), findsOneWidget);
     });
 
     testWidgets('renders Stack for layout', (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(TVSeriesCard(testTVSeries)));
+      await tester.pumpWidget(makeTestableWidget(TVSeriesCard(testTVSeries)));
 
       // Gunakan predicate untuk menemukan Stack yang spesifik (yang paling dalam)
       expect(
@@ -95,13 +95,13 @@ void main() {
 
     testWidgets('renders ClipRRect for image border radius',
         (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(TVSeriesCard(testTVSeries)));
+      await tester.pumpWidget(makeTestableWidget(TVSeriesCard(testTVSeries)));
 
       expect(find.byType(ClipRRect), findsOneWidget);
     });
 
     testWidgets('text overflow is set to ellipsis', (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(TVSeriesCard(testTVSeries)));
+      await tester.pumpWidget(makeTestableWidget(TVSeriesCard(testTVSeries)));
 
       final textWidgets = find.byType(Text);
       expect(textWidgets, findsWidgets);
@@ -109,7 +109,7 @@ void main() {
 
     testWidgets('displays fallback text when name is null',
         (WidgetTester tester) async {
-      final nullNameSeries = TVSeries(
+      final nullNameSeries = const TVSeries(
         backdropPath: '/backdrop.jpg',
         genreIds: [1],
         id: 124,
@@ -125,21 +125,21 @@ void main() {
         voteCount: 100,
       );
 
-      await tester.pumpWidget(_makeTestableWidget(TVSeriesCard(nullNameSeries)));
+      await tester.pumpWidget(makeTestableWidget(TVSeriesCard(nullNameSeries)));
 
       expect(find.text('-'), findsWidgets);
     });
 
     testWidgets('displays CircularProgressIndicator as placeholder',
         (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(TVSeriesCard(testTVSeries)));
+      await tester.pumpWidget(makeTestableWidget(TVSeriesCard(testTVSeries)));
 
       expect(find.byType(CircularProgressIndicator), findsWidgets);
     });
 
     testWidgets('displays fallback text when overview is null',
         (WidgetTester tester) async {
-      final nullOverviewSeries = TVSeries(
+      final nullOverviewSeries = const TVSeries(
         backdropPath: '/backdrop.jpg',
         genreIds: [1],
         id: 125,
@@ -155,21 +155,21 @@ void main() {
         voteCount: 100,
       );
 
-      await tester.pumpWidget(_makeTestableWidget(TVSeriesCard(nullOverviewSeries)));
+      await tester.pumpWidget(makeTestableWidget(TVSeriesCard(nullOverviewSeries)));
 
       expect(find.text('-'), findsWidgets);
     });
 
     testWidgets('container has correct margins and styling',
         (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(TVSeriesCard(testTVSeries)));
+      await tester.pumpWidget(makeTestableWidget(TVSeriesCard(testTVSeries)));
 
       final containerFinder = find.byType(Container);
       expect(containerFinder, findsWidgets);
     });
 
     testWidgets('all required widgets are present', (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(TVSeriesCard(testTVSeries)));
+      await tester.pumpWidget(makeTestableWidget(TVSeriesCard(testTVSeries)));
 
       expect(find.byType(Container), findsWidgets);
       expect(find.byType(InkWell), findsOneWidget);
@@ -189,13 +189,13 @@ void main() {
 
     testWidgets('SizedBox spacer is rendered between title and overview',
         (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(TVSeriesCard(testTVSeries)));
+      await tester.pumpWidget(makeTestableWidget(TVSeriesCard(testTVSeries)));
 
       expect(find.byType(SizedBox), findsWidgets);
     });
 
     testWidgets('InkWell has proper onTap handler', (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(TVSeriesCard(testTVSeries)));
+      await tester.pumpWidget(makeTestableWidget(TVSeriesCard(testTVSeries)));
 
       final inkWell = find.byType(InkWell);
       expect(inkWell, findsOneWidget);

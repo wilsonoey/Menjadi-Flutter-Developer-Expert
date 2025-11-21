@@ -30,13 +30,13 @@ void main() {
     when(mockBloc.stream).thenAnswer((_) => Stream.value(WatchlistTvSeriesLoading()));
     when(mockBloc.state).thenReturn(WatchlistTvSeriesLoading());
 
-    await tester.pumpWidget(makeTestableWidget(WatchlistTVSeriesPage()));
+    await tester.pumpWidget(makeTestableWidget(const WatchlistTVSeriesPage()));
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
 
   testWidgets('Should display TV series list when loaded', (WidgetTester tester) async {
     final tvSeries = [
-      TVSeries(
+      const TVSeries(
         id: 1,
         name: 'Test',
         posterPath: '/',
@@ -55,16 +55,16 @@ void main() {
     when(mockBloc.stream).thenAnswer((_) => Stream.value(WatchlistTvSeriesLoaded(tvSeries)));
     when(mockBloc.state).thenReturn(WatchlistTvSeriesLoaded(tvSeries));
 
-    await tester.pumpWidget(makeTestableWidget(WatchlistTVSeriesPage()));
+    await tester.pumpWidget(makeTestableWidget(const WatchlistTVSeriesPage()));
     expect(find.byType(ListView), findsOneWidget);
   });
 
   testWidgets('Should display error message on error state', (WidgetTester tester) async {
-    when(mockBloc.stream).thenAnswer((_) => Stream.value(WatchlistTvSeriesError('Error')));
-    when(mockBloc.state).thenReturn(WatchlistTvSeriesError('Error'));
+    when(mockBloc.stream).thenAnswer((_) => Stream.value(const WatchlistTvSeriesError('Error')));
+    when(mockBloc.state).thenReturn(const WatchlistTvSeriesError('Error'));
 
-    await tester.pumpWidget(makeTestableWidget(WatchlistTVSeriesPage()));
-    expect(find.byKey(Key('error_message')), findsOneWidget);
+    await tester.pumpWidget(makeTestableWidget(const WatchlistTVSeriesPage()));
+    expect(find.byKey(const Key('error_message')), findsOneWidget);
     expect(find.text('Error'), findsOneWidget);
   });
 
@@ -72,7 +72,7 @@ void main() {
     when(mockBloc.stream).thenAnswer((_) => Stream.value(WatchlistTvSeriesEmpty()));
     when(mockBloc.state).thenReturn(WatchlistTvSeriesEmpty());
 
-    await tester.pumpWidget(makeTestableWidget(WatchlistTVSeriesPage()));
+    await tester.pumpWidget(makeTestableWidget(const WatchlistTVSeriesPage()));
     expect(find.byType(SizedBox), findsOneWidget);
   });
 }

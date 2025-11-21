@@ -76,7 +76,7 @@ void main() {
       'Should emit [Loading, Error] when get data is unsuccessful',
       build: () {
         when(mockGetPopularMovies.execute())
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+            .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
         return popularMoviesBloc;
       },
       act: (bloc) => bloc.add(FetchPopularMovies()),
@@ -116,7 +116,7 @@ void main() {
       'Should emit [Loading, Error] when get data is unsuccessful',
       build: () {
         when(mockGetNowPlayingMovies.execute())
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+            .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
         return nowPlayingMoviesBloc;
       },
       act: (bloc) => bloc.add(FetchNowPlayingMovies()),
@@ -156,7 +156,7 @@ void main() {
       'Should emit [Loading, Error] when get data is unsuccessful',
       build: () {
         when(mockGetTopRatedMovies.execute())
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+            .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
         return topRatedMoviesBloc;
       },
       act: (bloc) => bloc.add(FetchTopRatedMovies()),

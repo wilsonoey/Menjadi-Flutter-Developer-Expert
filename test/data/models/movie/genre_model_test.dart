@@ -7,12 +7,12 @@ void main() {
     const tId = 28;
     const tName = 'Action';
 
-    final tGenreModel = GenreModel(
+    final tGenreModel = const GenreModel(
       id: tId,
       name: tName,
     );
 
-    final tGenreEntity = Genre(
+    final tGenreEntity = const Genre(
       id: tId,
       name: tName,
     );
@@ -24,8 +24,8 @@ void main() {
 
     test('should convert JSON to GenreModel', () {
       final Map<String, dynamic> jsonMap = {
-        "id": tId,
-        "name": tName,
+        'id': tId,
+        'name': tName,
       };
 
       final result = GenreModel.fromJson(jsonMap);
@@ -37,8 +37,8 @@ void main() {
       final result = tGenreModel.toJson();
 
       final expectedJsonMap = {
-        "id": tId,
-        "name": tName,
+        'id': tId,
+        'name': tName,
       };
 
       expect(result, expectedJsonMap);
@@ -51,8 +51,8 @@ void main() {
     });
 
     test('should be equal when properties are same', () {
-      final genreModel1 = GenreModel(id: tId, name: tName);
-      final genreModel2 = GenreModel(id: tId, name: tName);
+      final genreModel1 = const GenreModel(id: tId, name: tName);
+      final genreModel2 = const GenreModel(id: tId, name: tName);
 
       expect(genreModel1, genreModel2);
     });

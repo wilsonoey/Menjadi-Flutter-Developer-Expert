@@ -7,11 +7,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class SearchPage extends StatelessWidget {
   static const ROUTE_NAME = '/search';
 
+  const SearchPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search'),
+        title: const Text('Search'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -20,18 +22,18 @@ class SearchPage extends StatelessWidget {
           children: [
             TextField(
               onSubmitted: (query) {
-                BlocProvider.of<MovieSearchBloc>(context)..add(
+                BlocProvider.of<MovieSearchBloc>(context).add(
                   OnQueryChanged(query)
                 );
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Search title',
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(),
               ),
               textInputAction: TextInputAction.search,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               'Search Result',
               style: heading6,
@@ -39,7 +41,7 @@ class SearchPage extends StatelessWidget {
             BlocBuilder<MovieSearchBloc, MovieSearchState>(
               builder: (_, state) {
                 if (state is MovieSearchLoading) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 } else if (state is MovieSearchLoaded) {
@@ -55,7 +57,7 @@ class SearchPage extends StatelessWidget {
                     ),
                   );
                 } else {
-                  return Expanded(
+                  return const Expanded(
                     child: SizedBox(),
                   );
                 }

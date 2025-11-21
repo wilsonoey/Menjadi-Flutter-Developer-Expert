@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2025-11-16 15:44:48</td>
+            <td class="headerValue">2025-11-21 14:52:37</td>
             <td></td>
           </tr>
           <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -60,7 +60,7 @@
 <a name="2"><span class="lineNum">       2 </span>            : import 'package:equatable/equatable.dart';</a>
 <a name="3"><span class="lineNum">       3 </span>            : </a>
 <a name="4"><span class="lineNum">       4 </span>            : class GenreModel extends Equatable {</a>
-<a name="5"><span class="lineNum">       5 </span><span class="lineCov">          7 :   GenreModel({</span></a>
+<a name="5"><span class="lineNum">       5 </span><span class="lineCov">          6 :   const GenreModel({</span></a>
 <a name="6"><span class="lineNum">       6 </span>            :     required this.id,</a>
 <a name="7"><span class="lineNum">       7 </span>            :     required this.name,</a>
 <a name="8"><span class="lineNum">       8 </span>            :   });</a>
@@ -70,13 +70,13 @@
 <a name="12"><span class="lineNum">      12 </span>            : </a>
 <a name="13"><span class="lineNum">      13 </span><span class="lineCov">          6 :   factory GenreModel.fromJson(Map&lt;String, dynamic&gt; json) {</span></a>
 <a name="14"><span class="lineNum">      14 </span><span class="lineCov">          6 :     return GenreModel(</span></a>
-<a name="15"><span class="lineNum">      15 </span><span class="lineCov">          6 :       id: json[&quot;id&quot;],</span></a>
-<a name="16"><span class="lineNum">      16 </span><span class="lineCov">          6 :       name: json[&quot;name&quot;],</span></a>
+<a name="15"><span class="lineNum">      15 </span><span class="lineCov">          6 :       id: json['id'],</span></a>
+<a name="16"><span class="lineNum">      16 </span><span class="lineCov">          6 :       name: json['name'],</span></a>
 <a name="17"><span class="lineNum">      17 </span>            :     );</a>
 <a name="18"><span class="lineNum">      18 </span>            :   }</a>
 <a name="19"><span class="lineNum">      19 </span>            : </a>
-<a name="20"><span class="lineNum">      20 </span><span class="lineCov">         12 :   Map&lt;String, dynamic&gt; toJson() =&gt; { &quot;id&quot;: id, &quot;name&quot;: name, };</span></a>
-<a name="21"><span class="lineNum">      21 </span><span class="lineCov">         20 :   Genre toEntity() =&gt; Genre(id: this.id, name: this.name);</span></a>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">         12 :   Map&lt;String, dynamic&gt; toJson() =&gt; { 'id': id, 'name': name, };</span></a>
+<a name="21"><span class="lineNum">      21 </span><span class="lineCov">         20 :   Genre toEntity() =&gt; Genre(id: id, name: name);</span></a>
 <a name="22"><span class="lineNum">      22 </span>            : </a>
 <a name="23"><span class="lineNum">      23 </span><span class="lineCov">          5 :   @override</span></a>
 <a name="24"><span class="lineNum">      24 </span><span class="lineCov">         15 :   List&lt;Object?&gt; get props =&gt; [id, name];</span></a>

@@ -3,7 +3,7 @@ import 'package:ditonton/domain/entities/tv/tv_series.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final tTVSeriesModel = TVSeriesModel(
+  final tTVSeriesModel = const TVSeriesModel(
     backdropPath: '/path.jpg',
     firstAirDate: '2021-09-03',
     genreIds: [1, 2, 3],
@@ -19,7 +19,7 @@ void main() {
     voteCount: 1,
   );
 
-  final tTVSeries = TVSeries(
+  final tTVSeries = const TVSeries(
     backdropPath: '/path.jpg',
     firstAirDate: '2021-09-03',
     genreIds: [1, 2, 3],

@@ -4,7 +4,7 @@ import 'package:ditonton/domain/entities/movie/movie.dart';
 import 'package:ditonton/domain/entities/movie/movie_detail.dart';
 
 // Movie dummy data
-final testMovie = Movie(
+final testMovie = const Movie(
   adult: false,
   backdropPath: '/muth4OYamXf41G2evdrLEg8d3om.jpg',
   genreIds: [14, 28],
@@ -23,7 +23,7 @@ final testMovie = Movie(
 
 final testMovieList = [testMovie];
 
-final testMovieDetail = MovieDetail(
+final testMovieDetail = const MovieDetail(
   adult: false,
   backdropPath: 'backdropPath',
   genres: [Genre(id: 1, name: 'Action')],
@@ -38,14 +38,14 @@ final testMovieDetail = MovieDetail(
   voteCount: 1,
 );
 
-final testWatchlistMovie = Movie.watchlist(
+final testWatchlistMovie = const Movie.watchlist(
   id: 1,
   title: 'title',
   posterPath: 'posterPath',
   overview: 'overview',
 );
 
-final testMovieTable = MovieTable(
+final testMovieTable = const MovieTable(
   id: 1,
   title: 'title',
   posterPath: 'posterPath',

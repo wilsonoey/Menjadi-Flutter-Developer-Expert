@@ -79,7 +79,7 @@ void main() {
       'Should emit [Loading, Error] when get data is unsuccessful',
       build: () {
         when(mockGetPopularTVSeries.execute())
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+            .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
         return popularTVSeriesBloc;
       },
       act: (bloc) => bloc.add(FetchPopularTvSeries()),
@@ -119,7 +119,7 @@ void main() {
       'Should emit [Loading, Error] when get data is unsuccessful',
       build: () {
         when(mockGetOnTheAirTVSeries.execute())
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+            .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
         return onTheAirTVSeriesBloc;
       },
       act: (bloc) => bloc.add(FetchOnTheAirTvSeries()),
@@ -159,7 +159,7 @@ void main() {
       'Should emit [Loading, Error] when get data is unsuccessful',
       build: () {
         when(mockGetTopRatedTVSeries.execute())
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+            .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
         return topRatedTVSeriesBloc;
       },
       act: (bloc) => bloc.add(FetchTopRatedTvSeries()),

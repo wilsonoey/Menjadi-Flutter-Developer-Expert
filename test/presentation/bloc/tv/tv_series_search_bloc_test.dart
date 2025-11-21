@@ -47,7 +47,7 @@ void main() {
       'emits [TvSeriesSearchLoading, TvSeriesSearchError] when search fails',
       build: () {
         when(mockSearchTvSeries.execute(any))
-            .thenAnswer((_) async => Left(ServerFailure('Server error')));
+            .thenAnswer((_) async => const Left(ServerFailure('Server error')));
         return tvSeriesSearchBloc;
       },
       act: (bloc) => bloc.add(const OnTvSeriesQueryChanged('test')),

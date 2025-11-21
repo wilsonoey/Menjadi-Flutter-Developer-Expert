@@ -12,7 +12,7 @@ class MovieDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/detail';
 
   final int id;
-  MovieDetailPage({required this.id});
+  const MovieDetailPage({super.key, required this.id});
 
   @override
   _MovieDetailPageState createState() => _MovieDetailPageState();
@@ -58,7 +58,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
         },
         builder: (context, state) {
           if (state is MovieDetailLoading) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (state is MovieDetailLoaded) {
@@ -76,7 +76,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
               child: Text(state.message),
             );
           } else {
-            return SizedBox.shrink();
+            return const SizedBox.shrink();
           }
         },
       ),
@@ -88,7 +88,7 @@ class DetailContent extends StatelessWidget {
   final MovieDetail movie;
   final bool isAddedWatchlist;
 
-  DetailContent(this.movie, this.isAddedWatchlist);
+  const DetailContent(this.movie, this.isAddedWatchlist, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -98,17 +98,17 @@ class DetailContent extends StatelessWidget {
         CachedNetworkImage(
           imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
           width: screenWidth,
-          placeholder: (context, url) => Center(
+          placeholder: (context, url) => const Center(
             child: CircularProgressIndicator(),
           ),
-          errorWidget: (context, url, error) => Icon(Icons.error),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
         Container(
           margin: const EdgeInsets.only(top: 48 + 8),
           child: DraggableScrollableSheet(
             builder: (context, scrollController) {
               return Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: kRichBlack,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                 ),
@@ -148,10 +148,10 @@ class DetailContent extends StatelessWidget {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   isAddedWatchlist
-                                      ? Icon(Icons.check)
-                                      : Icon(Icons.add),
-                                  SizedBox(width: 4),
-                                  Text('Watchlist'),
+                                      ? const Icon(Icons.check)
+                                      : const Icon(Icons.add),
+                                  const SizedBox(width: 4),
+                                  const Text('Watchlist'),
                                 ],
                               ),
                             ),
@@ -166,7 +166,7 @@ class DetailContent extends StatelessWidget {
                                 RatingBarIndicator(
                                   rating: movie.voteAverage / 2,
                                   itemCount: 5,
-                                  itemBuilder: (_, _) => Icon(
+                                  itemBuilder: (_, _) => const Icon(
                                     Icons.star,
                                     color: kMikadoYellow,
                                   ),
@@ -175,7 +175,7 @@ class DetailContent extends StatelessWidget {
                                 Text('${movie.voteAverage}')
                               ],
                             ),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             Text(
                               'Overview',
                               style: heading6,
@@ -183,7 +183,7 @@ class DetailContent extends StatelessWidget {
                             Text(
                               movie.overview,
                             ),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             Text(
                               'Recommendations',
                               style: heading6,
@@ -214,7 +214,7 @@ class DetailContent extends StatelessWidget {
             backgroundColor: kRichBlack,
             foregroundColor: Colors.white,
             child: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -229,14 +229,14 @@ class DetailContent extends StatelessWidget {
     return BlocBuilder<MovieRecommendationsBloc, MovieRecommendationsState>(
       builder: (context, state) {
         if (state is MovieRecommendationsLoading) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         } else if (state is MovieRecommendationsError) {
           return Text(state.message);
         } else if (state is MovieRecommendationsLoaded) {
           final recommendations = state.movies;
-          return Container(
+          return SizedBox(
             height: 150,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -253,15 +253,15 @@ class DetailContent extends StatelessWidget {
                       );
                     },
                     child: ClipRRect(
-                      borderRadius: BorderRadius.all(
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(8),
                       ),
                       child: CachedNetworkImage(
                         imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
-                        placeholder: (context, url) => Center(
+                        placeholder: (context, url) => const Center(
                           child: CircularProgressIndicator(),
                         ),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
+                        errorWidget: (context, url, error) => const Icon(Icons.error),
                       ),
                     ),
                   ),
@@ -271,7 +271,7 @@ class DetailContent extends StatelessWidget {
             ),
           );
         } else {
-          return SizedBox.shrink();
+          return const SizedBox.shrink();
         }
       },
     );

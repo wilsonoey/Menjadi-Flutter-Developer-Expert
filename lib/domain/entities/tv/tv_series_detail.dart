@@ -4,7 +4,7 @@ import 'package:ditonton/domain/entities/movie/genre.dart';
 import 'package:ditonton/domain/entities/tv/season.dart';
 
 class TVSeriesDetail extends Equatable {
-  TVSeriesDetail({
+  const TVSeriesDetail({
     required this.backdropPath,
     required this.episodeRunTime,
     required this.firstAirDate,

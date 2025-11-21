@@ -4,11 +4,11 @@ import 'package:equatable/equatable.dart';
 class TVSeriesResponse extends Equatable {
   final List<TVSeriesModel> tvSeriesList;
 
-  TVSeriesResponse({required this.tvSeriesList});
+  const TVSeriesResponse({required this.tvSeriesList});
 
   factory TVSeriesResponse.fromJson(Map<String, dynamic> json) {
     return TVSeriesResponse(
-      tvSeriesList: List<TVSeriesModel>.from((json["results"] as List)
+      tvSeriesList: List<TVSeriesModel>.from((json['results'] as List)
           .map((x) => TVSeriesModel.fromJson(x))
           .where((element) => element.posterPath != null)),
     );
@@ -16,7 +16,7 @@ class TVSeriesResponse extends Equatable {
 
   Map<String, dynamic> toJson() {
     return {
-      "results": List<dynamic>.from(tvSeriesList.map((x) => x.toJson())),
+      'results': List<dynamic>.from(tvSeriesList.map((x) => x.toJson())),
     };
   }
 

@@ -68,17 +68,15 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
         final updatedStatus = await getWatchListStatus.execute(event.movie.id);
         
         // Emit loaded state dengan status terbaru
-        if (currentState is MovieDetailLoaded && !emit.isDone) {
-          emit(MovieDetailLoaded(
-            currentState.movie,
-            isAddedToWatchlist: updatedStatus,
-          ));
-        }
+        // Hapus pengecekan currentState is MovieDetailLoaded
+        // Gunakan event.movie agar state tetap terupdate meskipun state sebelumnya adalah MovieWatchlistMessage
+        emit(MovieDetailLoaded(
+          event.movie,
+          isAddedToWatchlist: updatedStatus,
+        ));
         
         // Kemudian emit message tanpa data
-        if (!emit.isDone) {
-          emit(MovieWatchlistMessage(successMessage));
-        }
+        emit(MovieWatchlistMessage(successMessage));
       },
     );
   }
@@ -109,17 +107,15 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
         final updatedStatus = await getWatchListStatus.execute(event.movie.id);
         
         // Emit loaded state dengan status terbaru
-        if (currentState is MovieDetailLoaded && !emit.isDone) {
-          emit(MovieDetailLoaded(
-            currentState.movie,
-            isAddedToWatchlist: updatedStatus,
-          ));
-        }
+        // Hapus pengecekan currentState is MovieDetailLoaded
+        // Gunakan event.movie agar state tetap terupdate meskipun state sebelumnya adalah MovieWatchlistMessage
+        emit(MovieDetailLoaded(
+          event.movie,
+          isAddedToWatchlist: updatedStatus,
+        ));
         
         // Kemudian emit message tanpa data
-        if (!emit.isDone) {
-          emit(MovieWatchlistMessage(successMessage));
-        }
+        emit(MovieWatchlistMessage(successMessage));
       },
     );
   }

@@ -44,17 +44,17 @@ void main() {
   const tId = 1;
 
   test('initial state should be Loading', () {
-    expect(tvSeriesDetailBloc.state, TvSeriesDetailLoading());
+    expect(tvSeriesDetailBloc.state, const TvSeriesDetailLoading());
   });
 
   group('Event Properties', () {
     test('TvSeriesDetailEvent props should return empty list', () {
-      final event = FetchTvSeriesDetail(tId);
+      final event = const FetchTvSeriesDetail(tId);
       expect(event.props, [tId]);
     });
 
     test('FetchTvSeriesDetail should have correct props', () {
-      final event = FetchTvSeriesDetail(tId);
+      final event = const FetchTvSeriesDetail(tId);
       expect(event.props, [tId]);
     });
 
@@ -69,7 +69,7 @@ void main() {
     });
 
     test('LoadTvSeriesWatchlistStatus should have correct props', () {
-      final event = LoadTvSeriesWatchlistStatus(tId);
+      final event = const LoadTvSeriesWatchlistStatus(tId);
       expect(event.props, [tId]);
     });
   });
@@ -86,7 +86,7 @@ void main() {
       },
       act: (bloc) => bloc.add(const FetchTvSeriesDetail(tId)),
       expect: () => [
-        TvSeriesDetailLoading(),
+        const TvSeriesDetailLoading(),
         TvSeriesDetailLoaded(testTVSeriesDetail, isAddedToWatchlist: false),
       ],
       verify: (_) {
@@ -106,7 +106,7 @@ void main() {
       },
       act: (bloc) => bloc.add(const FetchTvSeriesDetail(tId)),
       expect: () => [
-        TvSeriesDetailLoading(),
+        const TvSeriesDetailLoading(),
         TvSeriesDetailLoaded(testTVSeriesDetail, isAddedToWatchlist: true),
       ],
     );
@@ -115,14 +115,14 @@ void main() {
       'Should emit [Loading, Error] when get detail is unsuccessful',
       build: () {
         when(mockGetTVSeriesDetail.execute(tId))
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+            .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
         when(mockGetWatchListStatus.execute(tId))
             .thenAnswer((_) async => false);
         return tvSeriesDetailBloc;
       },
       act: (bloc) => bloc.add(const FetchTvSeriesDetail(tId)),
       expect: () => [
-        TvSeriesDetailLoading(),
+        const TvSeriesDetailLoading(),
         const TvSeriesDetailError('Server Failure'),
       ],
       verify: (_) {
@@ -134,14 +134,14 @@ void main() {
       'Should emit [Loading, Error] when database failure',
       build: () {
         when(mockGetTVSeriesDetail.execute(tId))
-            .thenAnswer((_) async => Left(DatabaseFailure('Database error')));
+            .thenAnswer((_) async => const Left(DatabaseFailure('Database error')));
         when(mockGetWatchListStatus.execute(tId))
             .thenAnswer((_) async => false);
         return tvSeriesDetailBloc;
       },
       act: (bloc) => bloc.add(const FetchTvSeriesDetail(tId)),
       expect: () => [
-        TvSeriesDetailLoading(),
+        const TvSeriesDetailLoading(),
         const TvSeriesDetailError('Database error'),
       ],
     );
@@ -150,14 +150,14 @@ void main() {
       'Should emit [Loading, Error] when connection failure',
       build: () {
         when(mockGetTVSeriesDetail.execute(tId))
-            .thenAnswer((_) async => Left(ConnectionFailure('Failed to connect')));
+            .thenAnswer((_) async => const Left(ConnectionFailure('Failed to connect')));
         when(mockGetWatchListStatus.execute(tId))
             .thenAnswer((_) async => false);
         return tvSeriesDetailBloc;
       },
       act: (bloc) => bloc.add(const FetchTvSeriesDetail(tId)),
       expect: () => [
-        TvSeriesDetailLoading(),
+        const TvSeriesDetailLoading(),
         const TvSeriesDetailError('Failed to connect'),
       ],
     );
@@ -236,7 +236,7 @@ void main() {
       'Should emit Loaded then success message when add watchlist success',
       build: () {
         when(mockSaveWatchlist.execute(testTVSeriesDetail))
-            .thenAnswer((_) async => Right('Added to Watchlist'));
+            .thenAnswer((_) async => const Right('Added to Watchlist'));
         when(mockGetWatchListStatus.execute(testTVSeriesDetail.id))
             .thenAnswer((_) async => true);
         
@@ -258,7 +258,7 @@ void main() {
       'Should emit error message when add watchlist failed with loaded state',
       build: () {
         when(mockSaveWatchlist.execute(testTVSeriesDetail))
-            .thenAnswer((_) async => Left(DatabaseFailure('Failed')));
+            .thenAnswer((_) async => const Left(DatabaseFailure('Failed')));
         
         return tvSeriesDetailBloc;
       },
@@ -279,7 +279,7 @@ void main() {
       'Should emit error when add watchlist fails without loaded state',
       build: () {
         when(mockSaveWatchlist.execute(testTVSeriesDetail))
-            .thenAnswer((_) async => Left(DatabaseFailure('Failed')));
+            .thenAnswer((_) async => const Left(DatabaseFailure('Failed')));
         
         return tvSeriesDetailBloc;
       },
@@ -295,7 +295,7 @@ void main() {
       'Should emit Loaded then success message when remove watchlist success',
       build: () {
         when(mockRemoveWatchlist.execute(testTVSeriesDetail))
-            .thenAnswer((_) async => Right('Removed from Watchlist'));
+            .thenAnswer((_) async => const Right('Removed from Watchlist'));
         when(mockGetWatchListStatus.execute(testTVSeriesDetail.id))
             .thenAnswer((_) async => false);
         
@@ -317,7 +317,7 @@ void main() {
       'Should emit error message when remove watchlist failed with loaded state',
       build: () {
         when(mockRemoveWatchlist.execute(testTVSeriesDetail))
-            .thenAnswer((_) async => Left(DatabaseFailure('Failed')));
+            .thenAnswer((_) async => const Left(DatabaseFailure('Failed')));
         
         return tvSeriesDetailBloc;
       },
@@ -335,7 +335,7 @@ void main() {
       'Should emit error when remove watchlist fails without loaded state',
       build: () {
         when(mockRemoveWatchlist.execute(testTVSeriesDetail))
-            .thenAnswer((_) async => Left(DatabaseFailure('Failed')));
+            .thenAnswer((_) async => const Left(DatabaseFailure('Failed')));
         
         return tvSeriesDetailBloc;
       },

@@ -48,13 +48,13 @@ void main() {
     'Should emit [Loading, Error] when get data is unsuccessful',
     build: () {
       when(mockGetPopularTvSeries.execute())
-          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       return popularTvSeriesBloc;
     },
     act: (bloc) => bloc.add(FetchPopularTvSeries()),
     expect: () => [
       PopularTvSeriesLoading(),
-      PopularTvSeriesError('Server Failure'),
+      const PopularTvSeriesError('Server Failure'),
     ],
   );
 }

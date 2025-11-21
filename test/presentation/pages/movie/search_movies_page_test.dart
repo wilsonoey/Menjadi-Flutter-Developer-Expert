@@ -17,7 +17,7 @@ void main() {
     mockMovieSearchBloc = MockMovieSearchBloc();
   });
 
-  Widget _makeTestableWidget(Widget body) {
+  Widget makeTestableWidget(Widget body) {
     return MaterialApp(
       home: BlocProvider<MovieSearchBloc>(
         create: (_) => mockMovieSearchBloc,
@@ -32,7 +32,7 @@ void main() {
     when(mockMovieSearchBloc.stream)
         .thenAnswer((_) => Stream.value(MovieSearchLoading()));
 
-    await tester.pumpWidget(_makeTestableWidget(SearchPage()));
+    await tester.pumpWidget(makeTestableWidget(const SearchPage()));
     await tester.pump();
 
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
@@ -41,7 +41,7 @@ void main() {
   testWidgets('Page should display list view when data is loaded',
       (WidgetTester tester) async {
     final movieList = [
-      Movie(
+      const Movie(
         backdropPath: '/path',
         genreIds: [],
         id: 1,
@@ -63,7 +63,7 @@ void main() {
     when(mockMovieSearchBloc.stream)
         .thenAnswer((_) => Stream.value(MovieSearchLoaded(movieList)));
 
-    await tester.pumpWidget(_makeTestableWidget(SearchPage()));
+    await tester.pumpWidget(makeTestableWidget(const SearchPage()));
     await tester.pump();
 
     expect(find.byType(ListView), findsOneWidget);
@@ -75,7 +75,7 @@ void main() {
     when(mockMovieSearchBloc.stream)
         .thenAnswer((_) => Stream.value(MovieSearchEmpty()));
 
-    await tester.pumpWidget(_makeTestableWidget(SearchPage()));
+    await tester.pumpWidget(makeTestableWidget(const SearchPage()));
     await tester.pump();
 
     expect(find.byType(SizedBox), findsWidgets);
@@ -87,7 +87,7 @@ void main() {
     when(mockMovieSearchBloc.stream)
         .thenAnswer((_) => Stream.value(MovieSearchEmpty()));
 
-    await tester.pumpWidget(_makeTestableWidget(SearchPage()));
+    await tester.pumpWidget(makeTestableWidget(const SearchPage()));
     await tester.pump();
 
     await tester.enterText(find.byType(TextField), 'test');

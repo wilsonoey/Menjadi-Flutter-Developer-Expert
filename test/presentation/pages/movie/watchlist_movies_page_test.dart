@@ -18,7 +18,7 @@ void main() {
     mockWatchlistMoviesBloc = MockWatchlistMoviesBloc();
   });
 
-  Widget _makeTestableWidget(Widget body) {
+  Widget makeTestableWidget(Widget body) {
     return MaterialApp(
       home: BlocProvider<WatchlistMoviesBloc>(
         create: (_) => mockWatchlistMoviesBloc,
@@ -33,14 +33,14 @@ void main() {
           .thenAnswer((_) => Stream.value(WatchlistMoviesLoading()));
       when(mockWatchlistMoviesBloc.state).thenReturn(WatchlistMoviesLoading());
 
-      await tester.pumpWidget(_makeTestableWidget(WatchlistMoviesPage()));
+      await tester.pumpWidget(makeTestableWidget(const WatchlistMoviesPage()));
 
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
     });
 
     testWidgets('displays loaded movies', (WidgetTester tester) async {
       final movies = [
-        Movie(
+        const Movie(
           adult: false,
           backdropPath: '/path',
           genreIds: [1, 2],
@@ -62,7 +62,7 @@ void main() {
       when(mockWatchlistMoviesBloc.state)
           .thenReturn(WatchlistMoviesLoaded(movies));
 
-      await tester.pumpWidget(_makeTestableWidget(WatchlistMoviesPage()));
+      await tester.pumpWidget(makeTestableWidget(const WatchlistMoviesPage()));
       await tester.pump();
 
       expect(find.byType(ListView), findsOneWidget);
@@ -70,14 +70,14 @@ void main() {
 
     testWidgets('displays error message', (WidgetTester tester) async {
       when(mockWatchlistMoviesBloc.stream)
-          .thenAnswer((_) => Stream.value(WatchlistMoviesError('Error message')));
+          .thenAnswer((_) => Stream.value(const WatchlistMoviesError('Error message')));
       when(mockWatchlistMoviesBloc.state)
-          .thenReturn(WatchlistMoviesError('Error message'));
+          .thenReturn(const WatchlistMoviesError('Error message'));
 
-      await tester.pumpWidget(_makeTestableWidget(WatchlistMoviesPage()));
+      await tester.pumpWidget(makeTestableWidget(const WatchlistMoviesPage()));
       await tester.pump();
 
-      expect(find.byKey(Key('error_message')), findsOneWidget);
+      expect(find.byKey(const Key('error_message')), findsOneWidget);
       expect(find.text('Error message'), findsOneWidget);
     });
 
@@ -86,7 +86,7 @@ void main() {
           .thenAnswer((_) => Stream.value(WatchlistMoviesEmpty()));
       when(mockWatchlistMoviesBloc.state).thenReturn(WatchlistMoviesEmpty());
 
-      await tester.pumpWidget(_makeTestableWidget(WatchlistMoviesPage()));
+      await tester.pumpWidget(makeTestableWidget(const WatchlistMoviesPage()));
       await tester.pump();
 
       expect(find.byType(SizedBox), findsWidgets);
@@ -97,7 +97,7 @@ void main() {
           .thenAnswer((_) => Stream.value(WatchlistMoviesEmpty()));
       when(mockWatchlistMoviesBloc.state).thenReturn(WatchlistMoviesEmpty());
 
-      await tester.pumpWidget(_makeTestableWidget(WatchlistMoviesPage()));
+      await tester.pumpWidget(makeTestableWidget(const WatchlistMoviesPage()));
 
       expect(find.text('Watchlist'), findsOneWidget);
       expect(find.byType(AppBar), findsOneWidget);
@@ -105,7 +105,7 @@ void main() {
 
     testWidgets('displays multiple movies in list', (WidgetTester tester) async {
       final movies = [
-        Movie(
+        const Movie(
           adult: false,
           backdropPath: '/path1',
           genreIds: [1],
@@ -120,7 +120,7 @@ void main() {
           voteAverage: 8.0,
           voteCount: 100,
         ),
-        Movie(
+        const Movie(
           adult: false,
           backdropPath: '/path2',
           genreIds: [2],
@@ -142,7 +142,7 @@ void main() {
       when(mockWatchlistMoviesBloc.state)
           .thenReturn(WatchlistMoviesLoaded(movies));
 
-      await tester.pumpWidget(_makeTestableWidget(WatchlistMoviesPage()));
+      await tester.pumpWidget(makeTestableWidget(const WatchlistMoviesPage()));
       await tester.pump();
 
       expect(find.byType(ListView), findsOneWidget);
@@ -154,7 +154,7 @@ void main() {
           .thenAnswer((_) => Stream.value(WatchlistMoviesEmpty()));
       when(mockWatchlistMoviesBloc.state).thenReturn(WatchlistMoviesEmpty());
 
-      await tester.pumpWidget(_makeTestableWidget(WatchlistMoviesPage()));
+      await tester.pumpWidget(makeTestableWidget(const WatchlistMoviesPage()));
 
       verify(mockWatchlistMoviesBloc.add(FetchWatchlistMovies())).called(1);
     });

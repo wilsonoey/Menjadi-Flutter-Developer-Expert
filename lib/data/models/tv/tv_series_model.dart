@@ -2,7 +2,7 @@ import 'package:ditonton/domain/entities/tv/tv_series.dart';
 import 'package:equatable/equatable.dart';
 
 class TVSeriesModel extends Equatable {
-  TVSeriesModel({
+  const TVSeriesModel({
     required this.backdropPath,
     required this.firstAirDate,
     required this.genreIds,
@@ -34,55 +34,55 @@ class TVSeriesModel extends Equatable {
 
   factory TVSeriesModel.fromJson(Map<String, dynamic> json) {
     return TVSeriesModel(
-      backdropPath: json["backdrop_path"],
-      firstAirDate: json["first_air_date"],
-      genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
-      id: json["id"],
-      name: json["name"],
-      originCountry: List<String>.from(json["origin_country"].map((x) => x)),
-      originalLanguage: json["original_language"],
-      originalName: json["original_name"],
-      overview: json["overview"],
-      popularity: json["popularity"].toDouble(),
-      posterPath: json["poster_path"],
-      voteAverage: json["vote_average"].toDouble(),
-      voteCount: json["vote_count"],
+      backdropPath: json['backdrop_path'],
+      firstAirDate: json['first_air_date'],
+      genreIds: List<int>.from(json['genre_ids'].map((x) => x)),
+      id: json['id'],
+      name: json['name'],
+      originCountry: List<String>.from(json['origin_country'].map((x) => x)),
+      originalLanguage: json['original_language'],
+      originalName: json['original_name'],
+      overview: json['overview'],
+      popularity: json['popularity'].toDouble(),
+      posterPath: json['poster_path'],
+      voteAverage: json['vote_average'].toDouble(),
+      voteCount: json['vote_count'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      "backdrop_path": backdropPath,
-      "first_air_date": firstAirDate,
-      "genre_ids": List<dynamic>.from(genreIds.map((x) => x)),
-      "id": id,
-      "name": name,
-      "origin_country": List<dynamic>.from(originCountry.map((x) => x)),
-      "original_language": originalLanguage,
-      "original_name": originalName,
-      "overview": overview,
-      "popularity": popularity,
-      "poster_path": posterPath,
-      "vote_average": voteAverage,
-      "vote_count": voteCount,
+      'backdrop_path': backdropPath,
+      'first_air_date': firstAirDate,
+      'genre_ids': List<dynamic>.from(genreIds.map((x) => x)),
+      'id': id,
+      'name': name,
+      'origin_country': List<dynamic>.from(originCountry.map((x) => x)),
+      'original_language': originalLanguage,
+      'original_name': originalName,
+      'overview': overview,
+      'popularity': popularity,
+      'poster_path': posterPath,
+      'vote_average': voteAverage,
+      'vote_count': voteCount,
     };
   }
 
   TVSeries toEntity() {
     return TVSeries(
-      backdropPath: this.backdropPath,
-      firstAirDate: this.firstAirDate,
-      genreIds: this.genreIds,
-      id: this.id,
-      name: this.name,
-      originCountry: this.originCountry,
-      originalLanguage: this.originalLanguage,
-      originalName: this.originalName,
-      overview: this.overview,
-      popularity: this.popularity,
-      posterPath: this.posterPath,
-      voteAverage: this.voteAverage,
-      voteCount: this.voteCount,
+      backdropPath: backdropPath,
+      firstAirDate: firstAirDate,
+      genreIds: genreIds,
+      id: id,
+      name: name,
+      originCountry: originCountry,
+      originalLanguage: originalLanguage,
+      originalName: originalName,
+      overview: overview,
+      popularity: popularity,
+      posterPath: posterPath,
+      voteAverage: voteAverage,
+      voteCount: voteCount,
     );
   }
 

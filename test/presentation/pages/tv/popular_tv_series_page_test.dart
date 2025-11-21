@@ -35,7 +35,7 @@ void main() {
     final progressFinder = find.byType(CircularProgressIndicator);
     final centerFinder = find.byType(Center);
 
-    await tester.pumpWidget(makeTestableWidget(PopularTVSeriesPage()));
+    await tester.pumpWidget(makeTestableWidget(const PopularTVSeriesPage()));
 
     expect(centerFinder, findsOneWidget);
     expect(progressFinder, findsOneWidget);
@@ -50,7 +50,7 @@ void main() {
 
     final listViewFinder = find.byType(ListView);
 
-    await tester.pumpWidget(makeTestableWidget(PopularTVSeriesPage()));
+    await tester.pumpWidget(makeTestableWidget(const PopularTVSeriesPage()));
 
     expect(listViewFinder, findsOneWidget);
   });
@@ -58,13 +58,13 @@ void main() {
   testWidgets('Page should display text with message when Error',
       (WidgetTester tester) async {
     when(mockPopularTvSeriesBloc.stream).thenAnswer(
-        (_) => Stream.value(PopularTvSeriesError('Error message')));
+        (_) => Stream.value(const PopularTvSeriesError('Error message')));
     when(mockPopularTvSeriesBloc.state)
-        .thenReturn(PopularTvSeriesError('Error message'));
+        .thenReturn(const PopularTvSeriesError('Error message'));
 
-    final textFinder = find.byKey(Key('error_message'));
+    final textFinder = find.byKey(const Key('error_message'));
 
-    await tester.pumpWidget(makeTestableWidget(PopularTVSeriesPage()));
+    await tester.pumpWidget(makeTestableWidget(const PopularTVSeriesPage()));
 
     expect(textFinder, findsOneWidget);
   });

@@ -54,7 +54,7 @@ void main() {
     mockTopRatedTvSeriesBloc.close();
   });
 
-  Widget _makeTestableWidget(Widget body) {
+  Widget makeTestableWidget(Widget body) {
     return MaterialApp(
       home: MultiBlocProvider(
         providers: [
@@ -75,7 +75,7 @@ void main() {
 
   group('HomeTVSeriesPage', () {
     testWidgets('displays AppBar with correct title', (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(HomeTVSeriesPage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeTVSeriesPage()));
 
       expect(find.text('TV Series'), findsWidgets);
       expect(find.byIcon(Icons.search), findsOneWidget);
@@ -83,7 +83,7 @@ void main() {
 
     testWidgets('displays drawer with correct menu items',
         (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(HomeTVSeriesPage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeTVSeriesPage()));
 
       expect(find.byIcon(Icons.menu), findsOneWidget);
       await tester.tap(find.byIcon(Icons.menu));
@@ -104,7 +104,7 @@ void main() {
       when(mockTopRatedTvSeriesBloc.state)
           .thenReturn(TopRatedTvSeriesEmpty());
 
-      await tester.pumpWidget(_makeTestableWidget(HomeTVSeriesPage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeTVSeriesPage()));
 
       expect(find.byType(CircularProgressIndicator), findsWidgets);
     });
@@ -112,7 +112,7 @@ void main() {
     testWidgets('On The Air section displays loaded state',
         (WidgetTester tester) async {
       final tvSeries = [
-        TVSeries(
+        const TVSeries(
           backdropPath: '/path.jpg',
           genreIds: [1, 2],
           id: 1,
@@ -123,7 +123,7 @@ void main() {
           voteAverage: 8.0,
           voteCount: 100,
           firstAirDate: '2024-01-01',
-          originCountry: ["US"],
+          originCountry: ['US'],
           originalLanguage: 'en',
           originalName: 'TV Series 1',
         ),
@@ -136,7 +136,7 @@ void main() {
       when(mockTopRatedTvSeriesBloc.state)
           .thenReturn(TopRatedTvSeriesEmpty());
 
-      await tester.pumpWidget(_makeTestableWidget(HomeTVSeriesPage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeTVSeriesPage()));
 
       expect(find.text('On The Air'), findsOneWidget);
       expect(find.byType(ListView), findsWidgets);
@@ -145,13 +145,13 @@ void main() {
     testWidgets('On The Air section displays error state',
         (WidgetTester tester) async {
       when(mockOnTheAirTvSeriesBloc.state)
-          .thenReturn(OnTheAirTvSeriesError('Error message'));
+          .thenReturn(const OnTheAirTvSeriesError('Error message'));
       when(mockPopularTvSeriesBloc.state)
           .thenReturn(PopularTvSeriesEmpty());
       when(mockTopRatedTvSeriesBloc.state)
           .thenReturn(TopRatedTvSeriesEmpty());
 
-      await tester.pumpWidget(_makeTestableWidget(HomeTVSeriesPage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeTVSeriesPage()));
 
       expect(find.text('Error message'), findsOneWidget);
     });
@@ -165,7 +165,7 @@ void main() {
       when(mockTopRatedTvSeriesBloc.state)
           .thenReturn(TopRatedTvSeriesEmpty());
 
-      await tester.pumpWidget(_makeTestableWidget(HomeTVSeriesPage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeTVSeriesPage()));
 
       expect(find.byType(CircularProgressIndicator), findsWidgets);
     });
@@ -173,7 +173,7 @@ void main() {
     testWidgets('Popular section displays loaded state',
         (WidgetTester tester) async {
       final tvSeries = [
-        TVSeries(
+        const TVSeries(
           backdropPath: '/path.jpg',
           genreIds: [1, 2],
           id: 2,
@@ -182,7 +182,7 @@ void main() {
           popularity: 2.0,
           posterPath: '/poster2.jpg',
           firstAirDate: '2024-02-01',
-          originCountry: ["US"],
+          originCountry: ['US'],
           originalLanguage: 'en',
           originalName: 'Popular TV Series',
           voteAverage: 7.5,
@@ -197,7 +197,7 @@ void main() {
       when(mockTopRatedTvSeriesBloc.state)
           .thenReturn(TopRatedTvSeriesEmpty());
 
-      await tester.pumpWidget(_makeTestableWidget(HomeTVSeriesPage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeTVSeriesPage()));
 
       expect(find.text('Popular'), findsOneWidget);
     });
@@ -207,11 +207,11 @@ void main() {
       when(mockOnTheAirTvSeriesBloc.state)
           .thenReturn(OnTheAirTvSeriesEmpty());
       when(mockPopularTvSeriesBloc.state)
-          .thenReturn(PopularTvSeriesError('Popular error'));
+          .thenReturn(const PopularTvSeriesError('Popular error'));
       when(mockTopRatedTvSeriesBloc.state)
           .thenReturn(TopRatedTvSeriesEmpty());
 
-      await tester.pumpWidget(_makeTestableWidget(HomeTVSeriesPage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeTVSeriesPage()));
 
       expect(find.text('Popular error'), findsOneWidget);
     });
@@ -225,7 +225,7 @@ void main() {
       when(mockTopRatedTvSeriesBloc.state)
           .thenReturn(TopRatedTvSeriesLoading());
 
-      await tester.pumpWidget(_makeTestableWidget(HomeTVSeriesPage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeTVSeriesPage()));
 
       expect(find.byType(CircularProgressIndicator), findsWidgets);
     });
@@ -233,7 +233,7 @@ void main() {
     testWidgets('Top Rated section displays loaded state',
         (WidgetTester tester) async {
       final tvSeries = [
-        TVSeries(
+        const TVSeries(
           backdropPath: '/path.jpg',
           genreIds: [1, 2],
           id: 3,
@@ -242,7 +242,7 @@ void main() {
           popularity: 3.0,
           posterPath: '/poster3.jpg',
           firstAirDate: '2024-03-01',
-          originCountry: ["US"],
+          originCountry: ['US'],
           originalLanguage: 'en',
           originalName: 'Top Rated TV Series',
           voteAverage: 9.0,
@@ -257,7 +257,7 @@ void main() {
       when(mockTopRatedTvSeriesBloc.state)
           .thenReturn(TopRatedTvSeriesLoaded(tvSeries));
 
-      await tester.pumpWidget(_makeTestableWidget(HomeTVSeriesPage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeTVSeriesPage()));
 
       expect(find.text('Top Rated'), findsOneWidget);
     });
@@ -269,9 +269,9 @@ void main() {
       when(mockPopularTvSeriesBloc.state)
           .thenReturn(PopularTvSeriesEmpty());
       when(mockTopRatedTvSeriesBloc.state)
-          .thenReturn(TopRatedTvSeriesError('Top rated error'));
+          .thenReturn(const TopRatedTvSeriesError('Top rated error'));
 
-      await tester.pumpWidget(_makeTestableWidget(HomeTVSeriesPage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeTVSeriesPage()));
 
       expect(find.text('Top rated error'), findsOneWidget);
     });
@@ -279,7 +279,7 @@ void main() {
     testWidgets('TVSeriesList renders horizontal ListView',
         (WidgetTester tester) async {
       final tvSeries = [
-        TVSeries(
+        const TVSeries(
           backdropPath: '/path.jpg',
           genreIds: [1],
           id: 1,
@@ -288,13 +288,13 @@ void main() {
           popularity: 1.0,
           posterPath: '/poster1.jpg',
           firstAirDate: '2024-01-01',
-          originCountry: ["US"],
+          originCountry: ['US'],
           originalLanguage: 'en',
           originalName: 'TV Series 1',
           voteAverage: 8.0,
           voteCount: 100,
         ),
-        TVSeries(
+        const TVSeries(
           backdropPath: '/path2.jpg',
           genreIds: [2],
           id: 2,
@@ -303,7 +303,7 @@ void main() {
           popularity: 2.0,
           posterPath: '/poster2.jpg',
           firstAirDate: '2024-02-01',
-          originCountry: ["US"],
+          originCountry: ['US'],
           originalLanguage: 'en',
           originalName: 'TV Series 2',
           voteAverage: 7.5,
@@ -318,7 +318,7 @@ void main() {
       when(mockTopRatedTvSeriesBloc.state)
           .thenReturn(TopRatedTvSeriesEmpty());
 
-      await tester.pumpWidget(_makeTestableWidget(HomeTVSeriesPage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeTVSeriesPage()));
 
       expect(find.byType(ListView), findsWidgets);
       expect(find.byType(InkWell), findsWidgets);

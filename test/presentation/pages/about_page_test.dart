@@ -6,7 +6,7 @@ void main() {
   group('AboutPage', () {
     testWidgets('should display Scaffold with Stack', (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: AboutPage(),
         ),
       );
@@ -26,7 +26,7 @@ void main() {
 
     testWidgets('should display top section with image', (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: AboutPage(),
         ),
       );
@@ -36,7 +36,7 @@ void main() {
 
     testWidgets('should display bottom section with yellow background and text', (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: AboutPage(),
         ),
       );
@@ -52,7 +52,7 @@ void main() {
 
     testWidgets('should have back button in SafeArea', (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: AboutPage(),
         ),
       );
@@ -63,7 +63,7 @@ void main() {
 
     testWidgets('should navigate back when back button is pressed', (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: AboutPage(),
           ),

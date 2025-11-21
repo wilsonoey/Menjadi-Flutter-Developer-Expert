@@ -10,14 +10,14 @@ void main() {
     const tPosterPath = '/poster.jpg';
     const tOverview = 'A high school chemistry teacher turned meth cook.';
 
-    final tTVSeriesTable = TVSeriesTable(
+    final tTVSeriesTable = const TVSeriesTable(
       id: tId,
       name: tName,
       posterPath: tPosterPath,
       overview: tOverview,
     );
 
-    final tTVSeriesDetail = TVSeriesDetail(
+    final tTVSeriesDetail = const TVSeriesDetail(
       id: tId,
       name: tName,
       posterPath: tPosterPath,
@@ -99,7 +99,7 @@ void main() {
     });
 
     test('should be equal when properties are same', () {
-      final tvSeriesTable1 = TVSeriesTable(
+      final tvSeriesTable1 = const TVSeriesTable(
         id: tId,
         name: tName,
         posterPath: tPosterPath,
@@ -110,7 +110,7 @@ void main() {
     });
 
     test('should handle null values correctly', () {
-      final tvSeriesTableWithNull = TVSeriesTable(
+      final tvSeriesTableWithNull = const TVSeriesTable(
         id: 1,
         name: null,
         posterPath: null,
@@ -123,7 +123,7 @@ void main() {
     });
 
     test('should convert TVSeriesTable with null values to JSON', () {
-      final tvSeriesTableWithNull = TVSeriesTable(
+      final tvSeriesTableWithNull = const TVSeriesTable(
         id: 1,
         name: null,
         posterPath: null,
@@ -143,7 +143,7 @@ void main() {
     });
 
     test('should convert TVSeriesTable with null values to TVSeries entity', () {
-      final tvSeriesTableWithNull = TVSeriesTable(
+      final tvSeriesTableWithNull = const TVSeriesTable(
         id: 1,
         name: null,
         posterPath: null,

@@ -17,7 +17,7 @@ void main() {
     mockTvSeriesSearchBloc = MockTvSeriesSearchBloc();
   });
 
-  Widget _makeTestableWidget(Widget body) {
+  Widget makeTestableWidget(Widget body) {
     return MaterialApp(
       home: BlocProvider<TvSeriesSearchBloc>(
         create: (_) => mockTvSeriesSearchBloc,
@@ -32,7 +32,7 @@ void main() {
         .thenAnswer((_) => Stream.value(TvSeriesSearchLoading()));
     when(mockTvSeriesSearchBloc.state).thenReturn(TvSeriesSearchLoading());
 
-    await tester.pumpWidget(_makeTestableWidget(SearchTVSeriesPage()));
+    await tester.pumpWidget(makeTestableWidget(const SearchTVSeriesPage()));
 
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
@@ -40,7 +40,7 @@ void main() {
   testWidgets('Page should display list view when data is loaded',
       (WidgetTester tester) async {
     final tvSeriesList = [
-      TVSeries(
+      const TVSeries(
         backdropPath: '/path',
         genreIds: [],
         id: 1,
@@ -62,7 +62,7 @@ void main() {
     when(mockTvSeriesSearchBloc.state)
         .thenReturn(TvSeriesSearchLoaded(tvSeriesList));
 
-    await tester.pumpWidget(_makeTestableWidget(SearchTVSeriesPage()));
+    await tester.pumpWidget(makeTestableWidget(const SearchTVSeriesPage()));
 
     expect(find.byType(ListView), findsOneWidget);
   });
@@ -73,7 +73,7 @@ void main() {
         .thenAnswer((_) => Stream.value(TvSeriesSearchEmpty()));
     when(mockTvSeriesSearchBloc.state).thenReturn(TvSeriesSearchEmpty());
 
-    await tester.pumpWidget(_makeTestableWidget(SearchTVSeriesPage()));
+    await tester.pumpWidget(makeTestableWidget(const SearchTVSeriesPage()));
 
     expect(find.byType(SizedBox), findsWidgets);
   });
@@ -84,7 +84,7 @@ void main() {
         .thenAnswer((_) => Stream.value(TvSeriesSearchEmpty()));
     when(mockTvSeriesSearchBloc.state).thenReturn(TvSeriesSearchEmpty());
 
-    await tester.pumpWidget(_makeTestableWidget(SearchTVSeriesPage()));
+    await tester.pumpWidget(makeTestableWidget(const SearchTVSeriesPage()));
 
     await tester.enterText(find.byType(TextField), 'test');
     await tester.testTextInput.receiveAction(TextInputAction.search);

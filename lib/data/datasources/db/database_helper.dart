@@ -31,7 +31,7 @@ class DatabaseHelper {
     final path = await getDatabasesPath();
     final databasePath = '$path/ditonton.db';
 
-    var db = await openDatabase(databasePath, version: 1, onCreate: _onCreate);
+    final db = await openDatabase(databasePath, version: 1, onCreate: _onCreate);
     return db;
   }
 
@@ -57,7 +57,11 @@ class DatabaseHelper {
   // Movie Watchlist Methods
   Future<int> insertWatchlist(MovieTable movie) async {
     final db = await database;
-    return await db!.insert(_tblWatchlist, movie.toJson());
+    return await db!.insert(
+      _tblWatchlist,
+      movie.toJson(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
   }
 
   Future<int> removeWatchlist(MovieTable movie) async {
@@ -94,7 +98,11 @@ class DatabaseHelper {
   // TV Series Watchlist Methods
   Future<int> insertTVSeriesWatchlist(TVSeriesTable tvSeries) async {
     final db = await database;
-    return await db!.insert(_tblTVSeriesWatchlist, tvSeries.toJson());
+    return await db!.insert(
+      _tblTVSeriesWatchlist,
+      tvSeries.toJson(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
   }
 
   Future<int> removeTVSeriesWatchlist(TVSeriesTable tvSeries) async {

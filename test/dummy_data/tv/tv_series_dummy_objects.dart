@@ -4,7 +4,7 @@ import 'package:ditonton/domain/entities/tv/season.dart';
 import 'package:ditonton/domain/entities/tv/tv_series.dart';
 import 'package:ditonton/domain/entities/tv/tv_series_detail.dart';
 
-final testTVSeries = TVSeries(
+final testTVSeries = const TVSeries(
   backdropPath: '/mUkuc2wyV9dHLG0D0Loaw5pO2s8.jpg',
   firstAirDate: '2011-04-17',
   genreIds: [10765, 10759, 18],
@@ -23,7 +23,7 @@ final testTVSeries = TVSeries(
 
 final testTVSeriesList = [testTVSeries];
 
-final testTVSeriesDetail = TVSeriesDetail(
+final testTVSeriesDetail = const TVSeriesDetail(
   backdropPath: '/suopoADq0k8YZr4dQXcU6pToj6s.jpg',
   episodeRunTime: [60],
   firstAirDate: '2011-04-17',
@@ -78,7 +78,7 @@ final testWatchlistTVSeries = TVSeries.watchlist(
       "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond.",
 );
 
-final testTVSeriesTable = TVSeriesTable(
+final testTVSeriesTable = const TVSeriesTable(
   id: 1399,
   name: 'Game of Thrones',
   posterPath: '/jIhL6mlT7AblhbHJgEoiBIOUVl1.jpg',

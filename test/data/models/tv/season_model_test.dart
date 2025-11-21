@@ -12,7 +12,7 @@ void main() {
     const tPosterPath = '/poster.jpg';
     const tSeasonNumber = 1;
 
-    final tSeasonModel = SeasonModel(
+    final tSeasonModel = const SeasonModel(
       airDate: tAirDate,
       episodeCount: tEpisodeCount,
       id: tId,
@@ -22,7 +22,7 @@ void main() {
       seasonNumber: tSeasonNumber,
     );
 
-    final tSeason = Season(
+    final tSeason = const Season(
       airDate: tAirDate,
       episodeCount: tEpisodeCount,
       id: tId,
@@ -40,13 +40,13 @@ void main() {
 
     test('should convert JSON to SeasonModel', () {
       final jsonMap = {
-        "air_date": tAirDate,
-        "episode_count": tEpisodeCount,
-        "id": tId,
-        "name": tName,
-        "overview": tOverview,
-        "poster_path": tPosterPath,
-        "season_number": tSeasonNumber,
+        'air_date': tAirDate,
+        'episode_count': tEpisodeCount,
+        'id': tId,
+        'name': tName,
+        'overview': tOverview,
+        'poster_path': tPosterPath,
+        'season_number': tSeasonNumber,
       };
 
       final result = SeasonModel.fromJson(jsonMap);
@@ -58,13 +58,13 @@ void main() {
       final result = tSeasonModel.toJson();
 
       final expectedJsonMap = {
-        "air_date": tAirDate,
-        "episode_count": tEpisodeCount,
-        "id": tId,
-        "name": tName,
-        "overview": tOverview,
-        "poster_path": tPosterPath,
-        "season_number": tSeasonNumber,
+        'air_date': tAirDate,
+        'episode_count': tEpisodeCount,
+        'id': tId,
+        'name': tName,
+        'overview': tOverview,
+        'poster_path': tPosterPath,
+        'season_number': tSeasonNumber,
       };
 
       expect(result, expectedJsonMap);
@@ -77,7 +77,7 @@ void main() {
     });
 
     test('should be equal when properties are same', () {
-      final seasonModel1 = SeasonModel(
+      final seasonModel1 = const SeasonModel(
         airDate: tAirDate,
         episodeCount: tEpisodeCount,
         id: tId,

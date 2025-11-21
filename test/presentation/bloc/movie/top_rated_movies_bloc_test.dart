@@ -48,13 +48,13 @@ void main() {
     'Should emit [Loading, Error] when get data is unsuccessful',
     build: () {
       when(mockGetTopRatedMovies.execute())
-          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       return topRatedMoviesBloc;
     },
     act: (bloc) => bloc.add(FetchTopRatedMovies()),
     expect: () => [
       TopRatedMoviesLoading(),
-      TopRatedMoviesError('Server Failure'),
+      const TopRatedMoviesError('Server Failure'),
     ],
     verify: (_) {
       verify(mockGetTopRatedMovies.execute());
@@ -65,13 +65,13 @@ void main() {
     'Should emit [Loading, Error] when connection failure',
     build: () {
       when(mockGetTopRatedMovies.execute())
-          .thenAnswer((_) async => Left(ConnectionFailure('Failed to connect')));
+          .thenAnswer((_) async => const Left(ConnectionFailure('Failed to connect')));
       return topRatedMoviesBloc;
     },
     act: (bloc) => bloc.add(FetchTopRatedMovies()),
     expect: () => [
       TopRatedMoviesLoading(),
-      TopRatedMoviesError('Failed to connect'),
+      const TopRatedMoviesError('Failed to connect'),
     ],
   );
 }

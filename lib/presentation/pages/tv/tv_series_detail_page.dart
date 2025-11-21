@@ -13,7 +13,7 @@ class TVSeriesDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/detail-tv-series';
 
   final int id;
-  TVSeriesDetailPage({required this.id});
+  const TVSeriesDetailPage({super.key, required this.id});
 
   @override
   _TVSeriesDetailPageState createState() => _TVSeriesDetailPageState();
@@ -59,7 +59,7 @@ class _TVSeriesDetailPageState extends State<TVSeriesDetailPage> {
         },
         builder: (context, state) {
           if (state is TvSeriesDetailLoading) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (state is TvSeriesDetailLoaded) {
@@ -77,7 +77,7 @@ class _TVSeriesDetailPageState extends State<TVSeriesDetailPage> {
               child: Text(state.message),
             );
           } else {
-            return SizedBox.shrink();
+            return const SizedBox.shrink();
           }
         },
       ),
@@ -89,7 +89,7 @@ class DetailContent extends StatelessWidget {
   final TVSeriesDetail tvSeries;
   final bool isAddedWatchlist;
 
-  DetailContent(this.tvSeries, this.isAddedWatchlist);
+  const DetailContent(this.tvSeries, this.isAddedWatchlist, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -99,17 +99,17 @@ class DetailContent extends StatelessWidget {
         CachedNetworkImage(
           imageUrl: '$BASE_IMAGE_URL${tvSeries.posterPath}',
           width: screenWidth,
-          placeholder: (context, url) => Center(
+          placeholder: (context, url) => const Center(
             child: CircularProgressIndicator(),
           ),
-          errorWidget: (context, url, error) => Icon(Icons.error),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
         Container(
           margin: const EdgeInsets.only(top: 48 + 8),
           child: DraggableScrollableSheet(
             builder: (context, scrollController) {
               return Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: kRichBlack,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                 ),
@@ -147,10 +147,10 @@ class DetailContent extends StatelessWidget {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   isAddedWatchlist
-                                      ? Icon(Icons.check)
-                                      : Icon(Icons.add),
-                                  SizedBox(width: 4),
-                                  Text('Watchlist'),
+                                      ? const Icon(Icons.check)
+                                      : const Icon(Icons.add),
+                                  const SizedBox(width: 4),
+                                  const Text('Watchlist'),
                                 ],
                               ),
                             ),
@@ -162,7 +162,7 @@ class DetailContent extends StatelessWidget {
                                 RatingBarIndicator(
                                   rating: tvSeries.voteAverage / 2,
                                   itemCount: 5,
-                                  itemBuilder: (_, _) => Icon(
+                                  itemBuilder: (_, _) => const Icon(
                                     Icons.star,
                                     color: kMikadoYellow,
                                   ),
@@ -171,7 +171,7 @@ class DetailContent extends StatelessWidget {
                                 Text('${tvSeries.voteAverage}')
                               ],
                             ),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             Text(
                               'Overview',
                               style: heading6,
@@ -179,13 +179,13 @@ class DetailContent extends StatelessWidget {
                             Text(
                               tvSeries.overview,
                             ),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             Text(
                               'Seasons',
                               style: heading6,
                             ),
                             _buildSeasonsList(tvSeries.seasons),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             Text(
                               'Recommendations',
                               style: heading6,
@@ -216,7 +216,7 @@ class DetailContent extends StatelessWidget {
             backgroundColor: kRichBlack,
             foregroundColor: Colors.white,
             child: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -231,14 +231,14 @@ class DetailContent extends StatelessWidget {
     return BlocBuilder<TvSeriesRecommendationsBloc, TvSeriesRecommendationsState>(
       builder: (context, state) {
         if (state is TvSeriesRecommendationsLoading) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         } else if (state is TvSeriesRecommendationsError) {
           return Text(state.message);
         } else if (state is TvSeriesRecommendationsLoaded) {
           final recommendations = state.tvSeries;
-          return Container(
+          return SizedBox(
             height: 150,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -256,15 +256,15 @@ class DetailContent extends StatelessWidget {
                       );
                     },
                     child: ClipRRect(
-                      borderRadius: BorderRadius.all(
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(8),
                       ),
                       child: CachedNetworkImage(
                         imageUrl: '$BASE_IMAGE_URL${tvSeries.posterPath}',
-                        placeholder: (context, url) => Center(
+                        placeholder: (context, url) => const Center(
                           child: CircularProgressIndicator(),
                         ),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
+                        errorWidget: (context, url, error) => const Icon(Icons.error),
                       ),
                     ),
                   ),
@@ -273,7 +273,7 @@ class DetailContent extends StatelessWidget {
             ),
           );
         } else {
-          return SizedBox.shrink();
+          return const SizedBox.shrink();
         }
       },
     );
@@ -281,10 +281,10 @@ class DetailContent extends StatelessWidget {
 
   Widget _buildSeasonsList(List<Season> seasons) {
     if (seasons.isEmpty) {
-      return Text('No season information available');
+      return const Text('No season information available');
     }
 
-    return Container(
+    return SizedBox(
       height: 200,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -294,7 +294,7 @@ class DetailContent extends StatelessWidget {
           return Card(
             child: Container(
               width: 140,
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -306,15 +306,15 @@ class DetailContent extends StatelessWidget {
                           imageUrl: '$BASE_IMAGE_URL${season.posterPath}',
                           fit: BoxFit.cover,
                           width: double.infinity,
-                          placeholder: (context, url) => Center(
+                          placeholder: (context, url) => const Center(
                             child: CircularProgressIndicator(),
                           ),
                           errorWidget: (context, url, error) =>
-                              Icon(Icons.error),
+                              const Icon(Icons.error),
                         ),
                       ),
                     ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
                     season.name,
                     style: subtitle,

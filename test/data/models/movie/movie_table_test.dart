@@ -10,21 +10,21 @@ void main() {
     const tPosterPath = '/poster.jpg';
     const tOverview = 'An insomniac office worker and a devil-may-care soap maker form an underground fight club.';
 
-    final tMovieTable = MovieTable(
+    final tMovieTable = const MovieTable(
       id: tId,
       title: tTitle,
       posterPath: tPosterPath,
       overview: tOverview,
     );
 
-    final tMovieDetail = MovieDetail(
+    final tMovieDetail = const MovieDetail(
       id: tId,
       title: tTitle,
       posterPath: tPosterPath,
       overview: tOverview,
       adult: false,
       backdropPath: '/backdrop.jpg',
-      genres: const [],
+      genres: [],
       originalTitle: 'Fight Club',
       releaseDate: '1999-10-15',
       runtime: 139,
@@ -32,7 +32,7 @@ void main() {
       voteCount: 26280,
     );
 
-    final tMovie = Movie.watchlist(
+    final tMovie = const Movie.watchlist(
       id: tId,
       title: tTitle,
       posterPath: tPosterPath,
@@ -92,7 +92,7 @@ void main() {
     });
 
     test('should be equal when properties are same', () {
-      final movieTable1 = MovieTable(
+      final movieTable1 = const MovieTable(
         id: tId,
         title: tTitle,
         posterPath: tPosterPath,
@@ -103,7 +103,7 @@ void main() {
     });
 
     test('should handle null values correctly', () {
-      final movieTableWithNull = MovieTable(
+      final movieTableWithNull = const MovieTable(
         id: 1,
         title: null,
         posterPath: null,
@@ -116,7 +116,7 @@ void main() {
     });
 
     test('should convert MovieTable with null values to JSON', () {
-      final movieTableWithNull = MovieTable(
+      final movieTableWithNull = const MovieTable(
         id: 1,
         title: null,
         posterPath: null,
@@ -136,7 +136,7 @@ void main() {
     });
 
     test('should convert MovieTable with null values to Movie entity', () {
-      final movieTableWithNull = MovieTable(
+      final movieTableWithNull = const MovieTable(
         id: 1,
         title: null,
         posterPath: null,

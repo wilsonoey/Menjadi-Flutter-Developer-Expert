@@ -8,10 +8,10 @@ import 'package:ditonton/domain/entities/tv/tv_series_detail.dart';
 
 void main() {
   group('TVSeriesDetailResponse', () {
-    final tGenreModel = GenreModel(id: 18, name: 'Drama');
-    final tGenreEntity = Genre(id: 18, name: 'Drama');
+    final tGenreModel = const GenreModel(id: 18, name: 'Drama');
+    final tGenreEntity = const Genre(id: 18, name: 'Drama');
 
-    final tSeasonModel = SeasonModel(
+    final tSeasonModel = const SeasonModel(
       airDate: '2008-01-20',
       episodeCount: 13,
       id: 3573,
@@ -21,7 +21,7 @@ void main() {
       seasonNumber: 1,
     );
 
-    final tSeasonEntity = Season(
+    final tSeasonEntity = const Season(
       airDate: '2008-01-20',
       episodeCount: 13,
       id: 3573,
@@ -33,7 +33,7 @@ void main() {
 
     final tTVSeriesDetailResponse = TVSeriesDetailResponse(
       backdropPath: '/backdrop.jpg',
-      episodeRunTime: [42],
+      episodeRunTime: const [42],
       firstAirDate: '2008-01-20',
       genres: [tGenreModel],
       id: 1396,
@@ -55,7 +55,7 @@ void main() {
 
     final tTVSeriesDetail = TVSeriesDetail(
       backdropPath: '/backdrop.jpg',
-      episodeRunTime: [42],
+      episodeRunTime: const [42],
       firstAirDate: '2008-01-20',
       genres: [tGenreEntity],
       id: 1396,
@@ -83,35 +83,35 @@ void main() {
 
     test('should convert JSON to TVSeriesDetailResponse', () {
       final jsonMap = {
-        "backdrop_path": "/backdrop.jpg",
-        "episode_run_time": [42],
-        "first_air_date": "2008-01-20",
-        "genres": [{"id": 18, "name": "Drama"}],
-        "id": 1396,
-        "last_air_date": "2013-05-19",
-        "name": "Breaking Bad",
-        "number_of_episodes": 62,
-        "number_of_seasons": 5,
-        "original_name": "Breaking Bad",
-        "overview": "A high school chemistry teacher turned meth cook.",
-        "popularity": 30.0,
-        "poster_path": "/poster.jpg",
-        "seasons": [
+        'backdrop_path': '/backdrop.jpg',
+        'episode_run_time': [42],
+        'first_air_date': '2008-01-20',
+        'genres': [{'id': 18, 'name': 'Drama'}],
+        'id': 1396,
+        'last_air_date': '2013-05-19',
+        'name': 'Breaking Bad',
+        'number_of_episodes': 62,
+        'number_of_seasons': 5,
+        'original_name': 'Breaking Bad',
+        'overview': 'A high school chemistry teacher turned meth cook.',
+        'popularity': 30.0,
+        'poster_path': '/poster.jpg',
+        'seasons': [
           {
-            "air_date": "2008-01-20",
-            "episode_count": 13,
-            "id": 3573,
-            "name": "Season 1",
-            "overview": "Season overview",
-            "poster_path": "/poster.jpg",
-            "season_number": 1,
+            'air_date': '2008-01-20',
+            'episode_count': 13,
+            'id': 3573,
+            'name': 'Season 1',
+            'overview': 'Season overview',
+            'poster_path': '/poster.jpg',
+            'season_number': 1,
           }
         ],
-        "status": "Ended",
-        "tagline": "Remember my name",
-        "type": "Scripted",
-        "vote_average": 9.5,
-        "vote_count": 11000,
+        'status': 'Ended',
+        'tagline': 'Remember my name',
+        'type': 'Scripted',
+        'vote_average': 9.5,
+        'vote_count': 11000,
       };
 
       final result = TVSeriesDetailResponse.fromJson(jsonMap);
@@ -123,35 +123,35 @@ void main() {
       final result = tTVSeriesDetailResponse.toJson();
 
       final expectedJsonMap = {
-        "backdrop_path": "/backdrop.jpg",
-        "episode_run_time": [42],
-        "first_air_date": "2008-01-20",
-        "genres": [{"id": 18, "name": "Drama"}],
-        "id": 1396,
-        "last_air_date": "2013-05-19",
-        "name": "Breaking Bad",
-        "number_of_episodes": 62,
-        "number_of_seasons": 5,
-        "original_name": "Breaking Bad",
-        "overview": "A high school chemistry teacher turned meth cook.",
-        "popularity": 30.0,
-        "poster_path": "/poster.jpg",
-        "seasons": [
+        'backdrop_path': '/backdrop.jpg',
+        'episode_run_time': [42],
+        'first_air_date': '2008-01-20',
+        'genres': [{'id': 18, 'name': 'Drama'}],
+        'id': 1396,
+        'last_air_date': '2013-05-19',
+        'name': 'Breaking Bad',
+        'number_of_episodes': 62,
+        'number_of_seasons': 5,
+        'original_name': 'Breaking Bad',
+        'overview': 'A high school chemistry teacher turned meth cook.',
+        'popularity': 30.0,
+        'poster_path': '/poster.jpg',
+        'seasons': [
           {
-            "air_date": "2008-01-20",
-            "episode_count": 13,
-            "id": 3573,
-            "name": "Season 1",
-            "overview": "Season overview",
-            "poster_path": "/poster.jpg",
-            "season_number": 1,
+            'air_date': '2008-01-20',
+            'episode_count': 13,
+            'id': 3573,
+            'name': 'Season 1',
+            'overview': 'Season overview',
+            'poster_path': '/poster.jpg',
+            'season_number': 1,
           }
         ],
-        "status": "Ended",
-        "tagline": "Remember my name",
-        "type": "Scripted",
-        "vote_average": 9.5,
-        "vote_count": 11000,
+        'status': 'Ended',
+        'tagline': 'Remember my name',
+        'type': 'Scripted',
+        'vote_average': 9.5,
+        'vote_count': 11000,
       };
 
       expect(result, expectedJsonMap);
@@ -193,7 +193,7 @@ void main() {
     test('should be equal when properties are same', () {
       final tvDetail1 = TVSeriesDetailResponse(
         backdropPath: '/backdrop.jpg',
-        episodeRunTime: [42],
+        episodeRunTime: const [42],
         firstAirDate: '2008-01-20',
         genres: [tGenreModel],
         id: 1396,

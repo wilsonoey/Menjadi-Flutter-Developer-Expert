@@ -19,14 +19,14 @@ void main() {
     when(mockOnTheAirTvSeriesBloc.state)
         .thenReturn(OnTheAirTvSeriesEmpty());
     when(mockOnTheAirTvSeriesBloc.stream)
-        .thenAnswer((_) => Stream.empty());
+        .thenAnswer((_) => const Stream.empty());
     when(mockOnTheAirTvSeriesBloc.add(any))
         .thenAnswer((_) async {});
     when(mockOnTheAirTvSeriesBloc.close())
         .thenAnswer((_) async {});
   });
 
-  Widget _makeTestableWidget(Widget body) {
+  Widget makeTestableWidget(Widget body) {
     return MaterialApp(
       home: BlocProvider<OnTheAirTvSeriesBloc>.value(
         value: mockOnTheAirTvSeriesBloc,
@@ -40,7 +40,7 @@ void main() {
       when(mockOnTheAirTvSeriesBloc.state)
           .thenReturn(OnTheAirTvSeriesEmpty());
 
-      await tester.pumpWidget(_makeTestableWidget(OnTheAirTVSeriesPage()));
+      await tester.pumpWidget(makeTestableWidget(const OnTheAirTVSeriesPage()));
       await tester.pump();
 
       expect(find.byType(AppBar), findsOneWidget);
@@ -54,7 +54,7 @@ void main() {
       when(mockOnTheAirTvSeriesBloc.stream)
           .thenAnswer((_) => Stream.value(OnTheAirTvSeriesLoading()));
 
-      await tester.pumpWidget(_makeTestableWidget(OnTheAirTVSeriesPage()));
+      await tester.pumpWidget(makeTestableWidget(const OnTheAirTVSeriesPage()));
       await tester.pump();
 
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
@@ -63,7 +63,7 @@ void main() {
     testWidgets('displays TV series list when state is loaded',
         (WidgetTester tester) async {
       final tVSeriesList = [
-        TVSeries(
+        const TVSeries(
           backdropPath: '/path1.jpg',
           genreIds: [1, 2],
           id: 1,
@@ -85,7 +85,7 @@ void main() {
       when(mockOnTheAirTvSeriesBloc.stream)
           .thenAnswer((_) => Stream.value(OnTheAirTvSeriesLoaded(tVSeriesList)));
 
-      await tester.pumpWidget(_makeTestableWidget(OnTheAirTVSeriesPage()));
+      await tester.pumpWidget(makeTestableWidget(const OnTheAirTVSeriesPage()));
       await tester.pump();
 
       expect(find.byType(ListView), findsOneWidget);
@@ -102,7 +102,7 @@ void main() {
           .thenAnswer((_) => Stream.value(
               const OnTheAirTvSeriesError(errorMessage)));
 
-      await tester.pumpWidget(_makeTestableWidget(OnTheAirTVSeriesPage()));
+      await tester.pumpWidget(makeTestableWidget(const OnTheAirTVSeriesPage()));
       await tester.pump();
 
       expect(find.byKey(const Key('error_message')), findsOneWidget);
@@ -114,9 +114,9 @@ void main() {
       when(mockOnTheAirTvSeriesBloc.state)
           .thenReturn(OnTheAirTvSeriesEmpty());
       when(mockOnTheAirTvSeriesBloc.stream)
-          .thenAnswer((_) => Stream.empty());
+          .thenAnswer((_) => const Stream.empty());
 
-      await tester.pumpWidget(_makeTestableWidget(OnTheAirTVSeriesPage()));
+      await tester.pumpWidget(makeTestableWidget(const OnTheAirTVSeriesPage()));
       await tester.pump();
 
       expect(find.byType(SizedBox), findsWidgets);

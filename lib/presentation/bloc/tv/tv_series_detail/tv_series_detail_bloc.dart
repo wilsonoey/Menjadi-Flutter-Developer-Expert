@@ -20,7 +20,7 @@ class TvSeriesDetailBloc extends Bloc<TvSeriesDetailEvent, TvSeriesDetailState> 
     required this.getWatchlistTvSeriesStatus,
     required this.saveWatchlistTvSeries,
     required this.removeWatchlistTvSeries,
-  }) : super(TvSeriesDetailLoading()) {
+  }) : super(const TvSeriesDetailLoading()) {
     on<FetchTvSeriesDetail>(_onFetchTvSeriesDetail);
     on<AddTvSeriesToWatchlist>(_onAddTvSeriesToWatchlist);
     on<RemoveTvSeriesFromWatchlist>(_onRemoveTvSeriesFromWatchlist);
@@ -31,7 +31,7 @@ class TvSeriesDetailBloc extends Bloc<TvSeriesDetailEvent, TvSeriesDetailState> 
     FetchTvSeriesDetail event,
     Emitter<TvSeriesDetailState> emit,
   ) async {
-    emit(TvSeriesDetailLoading());
+    emit(const TvSeriesDetailLoading());
 
     final detailResult = await getTvSeriesDetail.execute(event.id);
     final watchlistStatus = await getWatchlistTvSeriesStatus.execute(event.id);
@@ -63,16 +63,14 @@ class TvSeriesDetailBloc extends Bloc<TvSeriesDetailEvent, TvSeriesDetailState> 
         }
       },
       (successMessage) async {
-        if (currentState is TvSeriesDetailLoaded && !emit.isDone) {
-          final updatedStatus = await getWatchlistTvSeriesStatus.execute(event.tvSeries.id);
-          emit(TvSeriesDetailLoaded(
-            currentState.tvSeries,
-            isAddedToWatchlist: updatedStatus,
-          ));
-          if (!emit.isDone) {
-            emit(TvSeriesWatchlistMessage(successMessage));
-          }
-        }
+        final updatedStatus = await getWatchlistTvSeriesStatus.execute(event.tvSeries.id);
+        
+        emit(TvSeriesDetailLoaded(
+          event.tvSeries,
+          isAddedToWatchlist: updatedStatus,
+        ));
+        
+        emit(TvSeriesWatchlistMessage(successMessage));
       },
     );
   }
@@ -98,16 +96,14 @@ class TvSeriesDetailBloc extends Bloc<TvSeriesDetailEvent, TvSeriesDetailState> 
         }
       },
       (successMessage) async {
-        if (currentState is TvSeriesDetailLoaded && !emit.isDone) {
-          final updatedStatus = await getWatchlistTvSeriesStatus.execute(event.tvSeries.id);
-          emit(TvSeriesDetailLoaded(
-            currentState.tvSeries,
-            isAddedToWatchlist: updatedStatus,
-          ));
-          if (!emit.isDone) {
-            emit(TvSeriesWatchlistMessage(successMessage));
-          }
-        }
+        final updatedStatus = await getWatchlistTvSeriesStatus.execute(event.tvSeries.id);
+        
+        emit(TvSeriesDetailLoaded(
+          event.tvSeries,
+          isAddedToWatchlist: updatedStatus,
+        ));
+        
+        emit(TvSeriesWatchlistMessage(successMessage));
       },
     );
   }

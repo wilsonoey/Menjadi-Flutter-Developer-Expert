@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class TVSeriesCard extends StatelessWidget {
   final TVSeries tvSeries;
 
-  TVSeriesCard(this.tvSeries);
+  const TVSeriesCard(this.tvSeries, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class TVSeriesCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: heading6,
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Text(
                       tvSeries.overview ?? '-',
                       maxLines: 2,
@@ -56,14 +56,14 @@ class TVSeriesCard extends StatelessWidget {
                 bottom: 16,
               ),
               child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
                 child: CachedNetworkImage(
                   imageUrl: '$BASE_IMAGE_URL${tvSeries.posterPath}',
                   width: 80,
-                  placeholder: (context, url) => Center(
+                  placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),
                   ),
                 ),
-                borderRadius: BorderRadius.all(Radius.circular(8)),
               ),
             ),
           ],

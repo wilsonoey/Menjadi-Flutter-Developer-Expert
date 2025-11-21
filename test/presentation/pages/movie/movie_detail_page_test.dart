@@ -47,8 +47,8 @@ void main() {
         'should display loading indicator when movie detail state is loading',
         (WidgetTester tester) async {
       when(mockMovieDetailBloc.stream)
-          .thenAnswer((_) => Stream.value(MovieDetailLoading()));
-      when(mockMovieDetailBloc.state).thenReturn(MovieDetailLoading());
+          .thenAnswer((_) => Stream.value(const MovieDetailLoading()));
+      when(mockMovieDetailBloc.state).thenReturn(const MovieDetailLoading());
 
       when(mockMovieRecommendationsBloc.stream)
           .thenAnswer((_) => Stream.value(MovieRecommendationsLoading()));
@@ -62,7 +62,7 @@ void main() {
 
       final loadingFinder = find.byType(CircularProgressIndicator);
 
-      await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
+      await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
       await tester.pump();
 
       expect(loadingFinder, findsOneWidget);
@@ -72,23 +72,23 @@ void main() {
         'should display error message when movie detail state is error',
         (WidgetTester tester) async {
       when(mockMovieDetailBloc.stream)
-          .thenAnswer((_) => Stream.value(MovieDetailError('Error message')));
+          .thenAnswer((_) => Stream.value(const MovieDetailError('Error message')));
       when(mockMovieDetailBloc.state)
-          .thenReturn(MovieDetailError('Error message'));
+          .thenReturn(const MovieDetailError('Error message'));
 
       when(mockMovieRecommendationsBloc.stream)
-          .thenAnswer((_) => Stream.value(MovieRecommendationsError('Error')));
+          .thenAnswer((_) => Stream.value(const MovieRecommendationsError('Error')));
       when(mockMovieRecommendationsBloc.state)
-          .thenReturn(MovieRecommendationsError('Error'));
+          .thenReturn(const MovieRecommendationsError('Error'));
 
       when(mockWatchlistMoviesBloc.stream)
-          .thenAnswer((_) => Stream.value(WatchlistMoviesError('Error')));
+          .thenAnswer((_) => Stream.value(const WatchlistMoviesError('Error')));
       when(mockWatchlistMoviesBloc.state)
-          .thenReturn(WatchlistMoviesError('Error'));
+          .thenReturn(const WatchlistMoviesError('Error'));
 
       final errorFinder = find.text('Error message');
 
-      await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
+      await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
       await tester.pump();
 
       expect(errorFinder, findsOneWidget);
@@ -108,13 +108,13 @@ void main() {
           .thenReturn(MovieRecommendationsLoaded(testMovieList));
 
       when(mockWatchlistMoviesBloc.stream)
-          .thenAnswer((_) => Stream.value(WatchlistMoviesLoaded([])));
+          .thenAnswer((_) => Stream.value(const WatchlistMoviesLoaded([])));
       when(mockWatchlistMoviesBloc.state)
-          .thenReturn(WatchlistMoviesLoaded([]));
+          .thenReturn(const WatchlistMoviesLoaded([]));
 
       final titleFinder = find.text(testMovieDetail.title);
 
-      await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
+      await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
       await tester.pump();
 
       expect(titleFinder, findsOneWidget);
@@ -134,13 +134,13 @@ void main() {
           .thenReturn(MovieRecommendationsLoaded(testMovieList));
 
       when(mockWatchlistMoviesBloc.stream)
-          .thenAnswer((_) => Stream.value(WatchlistMoviesLoaded([])));
+          .thenAnswer((_) => Stream.value(const WatchlistMoviesLoaded([])));
       when(mockWatchlistMoviesBloc.state)
-          .thenReturn(WatchlistMoviesLoaded([]));
+          .thenReturn(const WatchlistMoviesLoaded([]));
 
       final watchlistButtonFinder = find.byIcon(Icons.add);
 
-      await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
+      await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
       await tester.pump();
 
       expect(watchlistButtonFinder, findsOneWidget);
@@ -166,7 +166,7 @@ void main() {
 
       final watchlistButtonFinder = find.byIcon(Icons.check);
 
-      await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
+      await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
       await tester.pump();
 
       expect(watchlistButtonFinder, findsOneWidget);
@@ -177,10 +177,10 @@ void main() {
         (WidgetTester tester) async {
       when(mockMovieDetailBloc.stream).thenAnswer((_) => Stream.fromIterable([
         MovieDetailLoaded(testMovieDetail, isAddedToWatchlist: false),
-        MovieWatchlistMessage('Added to Watchlist'),
+        const MovieWatchlistMessage('Added to Watchlist'),
       ]));
       when(mockMovieDetailBloc.state)
-          .thenReturn(MovieWatchlistMessage('Added to Watchlist'));
+          .thenReturn(const MovieWatchlistMessage('Added to Watchlist'));
 
       when(mockMovieRecommendationsBloc.stream)
           .thenAnswer((_) => Stream.value(MovieRecommendationsLoaded(testMovieList)));
@@ -188,10 +188,10 @@ void main() {
           .thenReturn(MovieRecommendationsLoaded(testMovieList));
 
       when(mockWatchlistMoviesBloc.stream)
-          .thenAnswer((_) => Stream.value(WatchlistMoviesLoaded([])));
-      when(mockWatchlistMoviesBloc.state).thenReturn(WatchlistMoviesLoaded([]));
+          .thenAnswer((_) => Stream.value(const WatchlistMoviesLoaded([])));
+      when(mockWatchlistMoviesBloc.state).thenReturn(const WatchlistMoviesLoaded([]));
 
-      await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
+      await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
       await tester.pump();
       await tester.pump();
 
@@ -214,10 +214,10 @@ void main() {
           .thenReturn(MovieRecommendationsLoaded(testMovieList));
 
       when(mockWatchlistMoviesBloc.stream)
-          .thenAnswer((_) => Stream.value(WatchlistMoviesLoaded([])));
-      when(mockWatchlistMoviesBloc.state).thenReturn(WatchlistMoviesLoaded([]));
+          .thenAnswer((_) => Stream.value(const WatchlistMoviesLoaded([])));
+      when(mockWatchlistMoviesBloc.state).thenReturn(const WatchlistMoviesLoaded([]));
 
-      await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
+      await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
       await tester.pump();
       await tester.pump();
 
@@ -238,11 +238,11 @@ void main() {
           .thenReturn(MovieRecommendationsLoading());
 
       when(mockWatchlistMoviesBloc.stream)
-          .thenAnswer((_) => Stream.value(WatchlistMoviesLoaded([])));
+          .thenAnswer((_) => Stream.value(const WatchlistMoviesLoaded([])));
       when(mockWatchlistMoviesBloc.state)
-          .thenReturn(WatchlistMoviesLoaded([]));
+          .thenReturn(const WatchlistMoviesLoaded([]));
 
-      await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
+      await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
       await tester.pump();
 
       expect(find.byType(CircularProgressIndicator), findsWidgets);
@@ -257,16 +257,16 @@ void main() {
           .thenReturn(MovieDetailLoaded(testMovieDetail, isAddedToWatchlist: false));
 
       when(mockMovieRecommendationsBloc.stream)
-          .thenAnswer((_) => Stream.value(MovieRecommendationsError('Error loading recommendations')));
+          .thenAnswer((_) => Stream.value(const MovieRecommendationsError('Error loading recommendations')));
       when(mockMovieRecommendationsBloc.state)
-          .thenReturn(MovieRecommendationsError('Error loading recommendations'));
+          .thenReturn(const MovieRecommendationsError('Error loading recommendations'));
 
       when(mockWatchlistMoviesBloc.stream)
-          .thenAnswer((_) => Stream.value(WatchlistMoviesLoaded([])));
+          .thenAnswer((_) => Stream.value(const WatchlistMoviesLoaded([])));
       when(mockWatchlistMoviesBloc.state)
-          .thenReturn(WatchlistMoviesLoaded([]));
+          .thenReturn(const WatchlistMoviesLoaded([]));
 
-      await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
+      await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
       await tester.pump();
 
       expect(find.text('Error loading recommendations'), findsOneWidget);
@@ -286,11 +286,11 @@ void main() {
           .thenReturn(MovieRecommendationsLoaded(testMovieList));
 
       when(mockWatchlistMoviesBloc.stream)
-          .thenAnswer((_) => Stream.value(WatchlistMoviesLoaded([])));
+          .thenAnswer((_) => Stream.value(const WatchlistMoviesLoaded([])));
       when(mockWatchlistMoviesBloc.state)
-          .thenReturn(WatchlistMoviesLoaded([]));
+          .thenReturn(const WatchlistMoviesLoaded([]));
 
-      await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
+      await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
       await tester.pump();
 
       final backButton = find.byIcon(Icons.arrow_back);
@@ -311,11 +311,11 @@ void main() {
           .thenReturn(MovieRecommendationsLoaded(testMovieList));
 
       when(mockWatchlistMoviesBloc.stream)
-          .thenAnswer((_) => Stream.value(WatchlistMoviesLoaded([])));
+          .thenAnswer((_) => Stream.value(const WatchlistMoviesLoaded([])));
       when(mockWatchlistMoviesBloc.state)
-          .thenReturn(WatchlistMoviesLoaded([]));
+          .thenReturn(const WatchlistMoviesLoaded([]));
 
-      await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
+      await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
       await tester.pump();
 
       final addButton = find.byIcon(Icons.add);
@@ -342,7 +342,7 @@ void main() {
       when(mockWatchlistMoviesBloc.state)
           .thenReturn(WatchlistMoviesLoaded([testMovie]));
 
-      await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
+      await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
       await tester.pump();
 
       final removeButton = find.byIcon(Icons.check);

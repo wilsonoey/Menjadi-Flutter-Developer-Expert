@@ -32,19 +32,19 @@ void main() {
 
   group('TvSeriesRecommendationsEvent', () {
     test('FetchTvSeriesRecommendations should have correct props', () {
-      final event = FetchTvSeriesRecommendations(tId);
+      final event = const FetchTvSeriesRecommendations(tId);
       expect(event.props, [tId]);
     });
 
     test('FetchTvSeriesRecommendations with same id should be equal', () {
-      final event1 = FetchTvSeriesRecommendations(tId);
-      final event2 = FetchTvSeriesRecommendations(tId);
+      final event1 = const FetchTvSeriesRecommendations(tId);
+      final event2 = const FetchTvSeriesRecommendations(tId);
       expect(event1, event2);
     });
 
     test('FetchTvSeriesRecommendations with different id should not be equal', () {
-      final event1 = FetchTvSeriesRecommendations(tId);
-      final event2 = FetchTvSeriesRecommendations(tId2);
+      final event1 = const FetchTvSeriesRecommendations(tId);
+      final event2 = const FetchTvSeriesRecommendations(tId2);
       expect(event1, isNot(event2));
     });
   });
@@ -61,7 +61,7 @@ void main() {
             .thenAnswer((_) async => Right(tTvSeriesList));
         return tvSeriesRecommendationsBloc;
       },
-      act: (bloc) => bloc.add(FetchTvSeriesRecommendations(tId)),
+      act: (bloc) => bloc.add(const FetchTvSeriesRecommendations(tId)),
       expect: () => [
         TvSeriesRecommendationsLoading(),
         TvSeriesRecommendationsLoaded(tTvSeriesList),
@@ -75,13 +75,13 @@ void main() {
       'Should emit [Loading, Error] when get data is unsuccessful',
       build: () {
         when(mockGetTvSeriesRecommendations.execute(tId))
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+            .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
         return tvSeriesRecommendationsBloc;
       },
-      act: (bloc) => bloc.add(FetchTvSeriesRecommendations(tId)),
+      act: (bloc) => bloc.add(const FetchTvSeriesRecommendations(tId)),
       expect: () => [
         TvSeriesRecommendationsLoading(),
-        TvSeriesRecommendationsError('Server Failure'),
+        const TvSeriesRecommendationsError('Server Failure'),
       ],
       verify: (_) {
         verify(mockGetTvSeriesRecommendations.execute(tId)).called(1);
@@ -92,13 +92,13 @@ void main() {
       'Should emit [Loading, Loaded] with empty list when no recommendations',
       build: () {
         when(mockGetTvSeriesRecommendations.execute(tId))
-            .thenAnswer((_) async => Right([]));
+            .thenAnswer((_) async => const Right([]));
         return tvSeriesRecommendationsBloc;
       },
-      act: (bloc) => bloc.add(FetchTvSeriesRecommendations(tId)),
+      act: (bloc) => bloc.add(const FetchTvSeriesRecommendations(tId)),
       expect: () => [
         TvSeriesRecommendationsLoading(),
-        TvSeriesRecommendationsLoaded([]),
+        const TvSeriesRecommendationsLoaded([]),
       ],
       verify: (_) {
         verify(mockGetTvSeriesRecommendations.execute(tId)).called(1);
@@ -109,13 +109,13 @@ void main() {
       'Should emit [Loading, Error] when connection failure occurs',
       build: () {
         when(mockGetTvSeriesRecommendations.execute(tId))
-            .thenAnswer((_) async => Left(ConnectionFailure('Connection Failure')));
+            .thenAnswer((_) async => const Left(ConnectionFailure('Connection Failure')));
         return tvSeriesRecommendationsBloc;
       },
-      act: (bloc) => bloc.add(FetchTvSeriesRecommendations(tId)),
+      act: (bloc) => bloc.add(const FetchTvSeriesRecommendations(tId)),
       expect: () => [
         TvSeriesRecommendationsLoading(),
-        TvSeriesRecommendationsError('Connection Failure'),
+        const TvSeriesRecommendationsError('Connection Failure'),
       ],
     );
 
@@ -123,13 +123,13 @@ void main() {
       'Should emit [Loading, Error] when cache failure occurs',
       build: () {
         when(mockGetTvSeriesRecommendations.execute(tId))
-            .thenAnswer((_) async => Left(DatabaseFailure('Cache Failure')));
+            .thenAnswer((_) async => const Left(DatabaseFailure('Cache Failure')));
         return tvSeriesRecommendationsBloc;
       },
-      act: (bloc) => bloc.add(FetchTvSeriesRecommendations(tId)),
+      act: (bloc) => bloc.add(const FetchTvSeriesRecommendations(tId)),
       expect: () => [
         TvSeriesRecommendationsLoading(),
-        TvSeriesRecommendationsError('Cache Failure'),
+        const TvSeriesRecommendationsError('Cache Failure'),
       ],
     );
 
@@ -141,7 +141,7 @@ void main() {
         return tvSeriesRecommendationsBloc;
       },
       act: (bloc) {
-        bloc.add(FetchTvSeriesRecommendations(tId));
+        bloc.add(const FetchTvSeriesRecommendations(tId));
       },
       expect: () => [
         TvSeriesRecommendationsLoading(),
@@ -175,20 +175,20 @@ void main() {
 
     test('TvSeriesRecommendationsError should have correct props', () {
       const message = 'Error message';
-      final state = TvSeriesRecommendationsError(message);
+      final state = const TvSeriesRecommendationsError(message);
       expect(state.props, [message]);
     });
 
     test('TvSeriesRecommendationsError with same message should be equal', () {
       const message = 'Error message';
-      final state1 = TvSeriesRecommendationsError(message);
-      final state2 = TvSeriesRecommendationsError(message);
+      final state1 = const TvSeriesRecommendationsError(message);
+      final state2 = const TvSeriesRecommendationsError(message);
       expect(state1, state2);
     });
 
     test('TvSeriesRecommendationsError with different message should not be equal', () {
-      final state1 = TvSeriesRecommendationsError('Error 1');
-      final state2 = TvSeriesRecommendationsError('Error 2');
+      final state1 = const TvSeriesRecommendationsError('Error 1');
+      final state2 = const TvSeriesRecommendationsError('Error 2');
       expect(state1, isNot(state2));
     });
   });

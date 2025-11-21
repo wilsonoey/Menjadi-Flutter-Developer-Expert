@@ -80,7 +80,7 @@ void main() {
       'Should emit [Loading, Error] when ServerFailure occurs',
       build: () {
         when(mockGetWatchlistMovies.execute())
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+            .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
         return watchlistMoviesBloc;
       },
       act: (bloc) => bloc.add(FetchWatchlistMovies()),
@@ -97,7 +97,7 @@ void main() {
       'Should emit [Loading, Error] when ConnectionFailure occurs',
       build: () {
         when(mockGetWatchlistMovies.execute())
-            .thenAnswer((_) async => Left(ConnectionFailure('Failed to connect')));
+            .thenAnswer((_) async => const Left(ConnectionFailure('Failed to connect')));
         return watchlistMoviesBloc;
       },
       act: (bloc) => bloc.add(FetchWatchlistMovies()),
@@ -114,7 +114,7 @@ void main() {
       'Should emit [Loading, Error] when DatabaseFailure occurs',
       build: () {
         when(mockGetWatchlistMovies.execute())
-            .thenAnswer((_) async => Left(DatabaseFailure('Database error')));
+            .thenAnswer((_) async => const Left(DatabaseFailure('Database error')));
         return watchlistMoviesBloc;
       },
       act: (bloc) => bloc.add(FetchWatchlistMovies()),
@@ -181,7 +181,7 @@ void main() {
 
     test('WatchlistMoviesLoaded with different movies should not be equal', () {
       final state1 = WatchlistMoviesLoaded([testMovie]);
-      final state2 = WatchlistMoviesLoaded([]);
+      final state2 = const WatchlistMoviesLoaded([]);
       expect(state1, isNot(state2));
     });
 

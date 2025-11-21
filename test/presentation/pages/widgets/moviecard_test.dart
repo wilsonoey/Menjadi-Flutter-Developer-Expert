@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final testMovie = Movie(
+  final testMovie = const Movie(
     adult: false,
     backdropPath: '/backdrop.jpg',
     genreIds: [1, 2],
@@ -20,7 +20,7 @@ void main() {
     voteCount: 200,
   );
 
-  Widget _makeTestableWidget(Widget body) {
+  Widget makeTestableWidget(Widget body) {
     return MaterialApp(
       home: Scaffold(body: body),
       routes: {
@@ -40,31 +40,31 @@ void main() {
 
   group('MovieCard', () {
     testWidgets('displays movie title correctly', (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(MovieCard(testMovie)));
+      await tester.pumpWidget(makeTestableWidget(MovieCard(testMovie)));
 
       expect(find.text('Test Movie'), findsOneWidget);
     });
 
     testWidgets('displays movie overview correctly', (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(MovieCard(testMovie)));
+      await tester.pumpWidget(makeTestableWidget(MovieCard(testMovie)));
 
       expect(find.text('Great movie overview'), findsOneWidget);
     });
 
     testWidgets('renders Card widget', (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(MovieCard(testMovie)));
+      await tester.pumpWidget(makeTestableWidget(MovieCard(testMovie)));
 
       expect(find.byType(Card), findsOneWidget);
     });
 
     testWidgets('renders InkWell for tap interaction', (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(MovieCard(testMovie)));
+      await tester.pumpWidget(makeTestableWidget(MovieCard(testMovie)));
 
       expect(find.byType(InkWell), findsOneWidget);
     });
 
     testWidgets('renders Stack for layout', (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(MovieCard(testMovie)));
+      await tester.pumpWidget(makeTestableWidget(MovieCard(testMovie)));
 
       final stackFinder = find.byWidgetPredicate(
         (widget) => widget is Stack && widget.alignment == Alignment.bottomLeft,
@@ -74,14 +74,14 @@ void main() {
 
     testWidgets('renders ClipRRect for image border radius',
         (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(MovieCard(testMovie)));
+      await tester.pumpWidget(makeTestableWidget(MovieCard(testMovie)));
 
       expect(find.byType(ClipRRect), findsOneWidget);
     });
 
     testWidgets('displays fallback text when title is null',
         (WidgetTester tester) async {
-      final nullTitleMovie = Movie(
+      final nullTitleMovie = const Movie(
         adult: false,
         backdropPath: '/backdrop.jpg',
         genreIds: [1],
@@ -97,20 +97,20 @@ void main() {
         voteCount: 100,
       );
 
-      await tester.pumpWidget(_makeTestableWidget(MovieCard(nullTitleMovie)));
+      await tester.pumpWidget(makeTestableWidget(MovieCard(nullTitleMovie)));
 
       expect(find.text('-'), findsWidgets);
     });
 
     testWidgets('displays CircularProgressIndicator as placeholder',
         (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(MovieCard(testMovie)));
+      await tester.pumpWidget(makeTestableWidget(MovieCard(testMovie)));
 
       expect(find.byType(CircularProgressIndicator), findsWidgets);
     });
 
     testWidgets('tappable area responds to tap', (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(MovieCard(testMovie)));
+      await tester.pumpWidget(makeTestableWidget(MovieCard(testMovie)));
       await tester.pump();
 
       final inkWellFinder = find.byType(InkWell);
@@ -124,7 +124,7 @@ void main() {
 
     testWidgets('displays fallback text when overview is null',
         (WidgetTester tester) async {
-      final nullOverviewMovie = Movie(
+      final nullOverviewMovie = const Movie(
         adult: false,
         backdropPath: '/backdrop.jpg',
         genreIds: [1],
@@ -140,28 +140,28 @@ void main() {
         voteCount: 100,
       );
 
-      await tester.pumpWidget(_makeTestableWidget(MovieCard(nullOverviewMovie)));
+      await tester.pumpWidget(makeTestableWidget(MovieCard(nullOverviewMovie)));
 
       expect(find.text('-'), findsWidgets);
     });
 
     testWidgets('container has correct margins and styling',
         (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(MovieCard(testMovie)));
+      await tester.pumpWidget(makeTestableWidget(MovieCard(testMovie)));
 
       final containerFinder = find.byType(Container);
       expect(containerFinder, findsWidgets);
     });
 
     testWidgets('text widgets have correct styling', (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(MovieCard(testMovie)));
+      await tester.pumpWidget(makeTestableWidget(MovieCard(testMovie)));
 
       final textWidgets = find.byType(Text);
       expect(textWidgets.evaluate().length, greaterThanOrEqualTo(2));
     });
 
     testWidgets('image container has correct dimensions', (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(MovieCard(testMovie)));
+      await tester.pumpWidget(makeTestableWidget(MovieCard(testMovie)));
 
       expect(find.byType(ClipRRect), findsOneWidget);
       expect(find.byType(Container), findsWidgets);
@@ -169,13 +169,13 @@ void main() {
 
     testWidgets('SizedBox spacer is rendered between title and overview',
         (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(MovieCard(testMovie)));
+      await tester.pumpWidget(makeTestableWidget(MovieCard(testMovie)));
 
       expect(find.byType(SizedBox), findsWidgets);
     });
 
     testWidgets('InkWell has proper onTap handler', (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(MovieCard(testMovie)));
+      await tester.pumpWidget(makeTestableWidget(MovieCard(testMovie)));
       await tester.pump();
 
       final inkWell = find.byType(InkWell);
@@ -188,7 +188,7 @@ void main() {
     });
 
     testWidgets('all required widgets are present', (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(MovieCard(testMovie)));
+      await tester.pumpWidget(makeTestableWidget(MovieCard(testMovie)));
 
       expect(find.byType(Container), findsWidgets);
       expect(find.byType(InkWell), findsOneWidget);

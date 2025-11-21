@@ -79,7 +79,7 @@ void main() {
       'Should emit [Loading, Error] when ServerFailure occurs',
       build: () {
         when(mockGetWatchlistTvSeries.execute())
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+            .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
         return watchlistTvSeriesBloc;
       },
       act: (bloc) => bloc.add(FetchWatchlistTvSeries()),
@@ -96,7 +96,7 @@ void main() {
       'Should emit [Loading, Error] when ConnectionFailure occurs',
       build: () {
         when(mockGetWatchlistTvSeries.execute())
-            .thenAnswer((_) async => Left(ConnectionFailure('Failed to connect')));
+            .thenAnswer((_) async => const Left(ConnectionFailure('Failed to connect')));
         return watchlistTvSeriesBloc;
       },
       act: (bloc) => bloc.add(FetchWatchlistTvSeries()),
@@ -113,7 +113,7 @@ void main() {
       'Should emit [Loading, Error] when DatabaseFailure occurs',
       build: () {
         when(mockGetWatchlistTvSeries.execute())
-            .thenAnswer((_) async => Left(DatabaseFailure('Database error')));
+            .thenAnswer((_) async => const Left(DatabaseFailure('Database error')));
         return watchlistTvSeriesBloc;
       },
       act: (bloc) => bloc.add(FetchWatchlistTvSeries()),
@@ -180,7 +180,7 @@ void main() {
 
     test('WatchlistTvSeriesLoaded with different series should not be equal', () {
       final state1 = WatchlistTvSeriesLoaded([testTVSeries]);
-      final state2 = WatchlistTvSeriesLoaded([]);
+      final state2 = const WatchlistTvSeriesLoaded([]);
       expect(state1, isNot(state2));
     });
 

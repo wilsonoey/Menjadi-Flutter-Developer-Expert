@@ -35,7 +35,7 @@ void main() {
     final progressFinder = find.byType(CircularProgressIndicator);
     final centerFinder = find.byType(Center);
 
-    await tester.pumpWidget(makeTestableWidget(TopRatedMoviesPage()));
+    await tester.pumpWidget(makeTestableWidget(const TopRatedMoviesPage()));
 
     expect(centerFinder, findsOneWidget);
     expect(progressFinder, findsOneWidget);
@@ -50,7 +50,7 @@ void main() {
 
     final listViewFinder = find.byType(ListView);
 
-    await tester.pumpWidget(makeTestableWidget(TopRatedMoviesPage()));
+    await tester.pumpWidget(makeTestableWidget(const TopRatedMoviesPage()));
 
     expect(listViewFinder, findsOneWidget);
   });
@@ -58,13 +58,13 @@ void main() {
   testWidgets('Page should display text with message when Error',
       (WidgetTester tester) async {
     when(mockTopRatedMoviesBloc.stream).thenAnswer(
-        (_) => Stream.value(TopRatedMoviesError('Error message')));
+        (_) => Stream.value(const TopRatedMoviesError('Error message')));
     when(mockTopRatedMoviesBloc.state)
-        .thenReturn(TopRatedMoviesError('Error message'));
+        .thenReturn(const TopRatedMoviesError('Error message'));
 
-    final textFinder = find.byKey(Key('error_message'));
+    final textFinder = find.byKey(const Key('error_message'));
 
-    await tester.pumpWidget(makeTestableWidget(TopRatedMoviesPage()));
+    await tester.pumpWidget(makeTestableWidget(const TopRatedMoviesPage()));
 
     expect(textFinder, findsOneWidget);
   });
@@ -78,7 +78,7 @@ void main() {
     final progressFinder = find.byType(CircularProgressIndicator);
     final centerFinder = find.byType(Center);
 
-    await tester.pumpWidget(makeTestableWidget(TopRatedMoviesPage()));
+    await tester.pumpWidget(makeTestableWidget(const TopRatedMoviesPage()));
 
     expect(centerFinder, findsOneWidget);
     expect(progressFinder, findsOneWidget);
@@ -93,7 +93,7 @@ void main() {
 
     final listViewFinder = find.byType(ListView);
 
-    await tester.pumpWidget(makeTestableWidget(TopRatedMoviesPage()));
+    await tester.pumpWidget(makeTestableWidget(const TopRatedMoviesPage()));
 
     expect(listViewFinder, findsOneWidget);
   });
@@ -101,13 +101,13 @@ void main() {
   testWidgets('Page should display text with message when Error',
       (WidgetTester tester) async {
     when(mockTopRatedMoviesBloc.stream)
-        .thenAnswer((_) => Stream.value(TopRatedMoviesError('Error message')));
+        .thenAnswer((_) => Stream.value(const TopRatedMoviesError('Error message')));
     when(mockTopRatedMoviesBloc.state)
-        .thenReturn(TopRatedMoviesError('Error message'));
+        .thenReturn(const TopRatedMoviesError('Error message'));
 
-    final textFinder = find.byKey(Key('error_message'));
+    final textFinder = find.byKey(const Key('error_message'));
 
-    await tester.pumpWidget(makeTestableWidget(TopRatedMoviesPage()));
+    await tester.pumpWidget(makeTestableWidget(const TopRatedMoviesPage()));
 
     expect(textFinder, findsOneWidget);
   });
@@ -120,7 +120,7 @@ void main() {
 
     final sizedBoxFinder = find.byType(SizedBox);
 
-    await tester.pumpWidget(makeTestableWidget(TopRatedMoviesPage()));
+    await tester.pumpWidget(makeTestableWidget(const TopRatedMoviesPage()));
 
     expect(sizedBoxFinder, findsOneWidget);
   });

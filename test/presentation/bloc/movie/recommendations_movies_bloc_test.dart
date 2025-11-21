@@ -31,19 +31,19 @@ void main() {
 
   group('MovieRecommendationsEvent', () {
     test('FetchMovieRecommendations should have correct props', () {
-      final event = FetchMovieRecommendations(tId);
+      final event = const FetchMovieRecommendations(tId);
       expect(event.props, [tId]);
     });
 
     test('FetchMovieRecommendations with same id should be equal', () {
-      final event1 = FetchMovieRecommendations(tId);
-      final event2 = FetchMovieRecommendations(tId);
+      final event1 = const FetchMovieRecommendations(tId);
+      final event2 = const FetchMovieRecommendations(tId);
       expect(event1, event2);
     });
 
     test('FetchMovieRecommendations with different id should not be equal', () {
-      final event1 = FetchMovieRecommendations(tId);
-      final event2 = FetchMovieRecommendations(tId2);
+      final event1 = const FetchMovieRecommendations(tId);
+      final event2 = const FetchMovieRecommendations(tId2);
       expect(event1, isNot(event2));
     });
   });
@@ -60,7 +60,7 @@ void main() {
             .thenAnswer((_) async => Right(tMovieList));
         return movieRecommendationsBloc;
       },
-      act: (bloc) => bloc.add(FetchMovieRecommendations(tId)),
+      act: (bloc) => bloc.add(const FetchMovieRecommendations(tId)),
       expect: () => [
         MovieRecommendationsLoading(),
         MovieRecommendationsLoaded(tMovieList),
@@ -74,13 +74,13 @@ void main() {
       'Should emit [Loading, Error] when get data is unsuccessful',
       build: () {
         when(mockGetMovieRecommendations.execute(tId))
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+            .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
         return movieRecommendationsBloc;
       },
-      act: (bloc) => bloc.add(FetchMovieRecommendations(tId)),
+      act: (bloc) => bloc.add(const FetchMovieRecommendations(tId)),
       expect: () => [
         MovieRecommendationsLoading(),
-        MovieRecommendationsError('Server Failure'),
+        const MovieRecommendationsError('Server Failure'),
       ],
       verify: (_) {
         verify(mockGetMovieRecommendations.execute(tId)).called(1);
@@ -91,13 +91,13 @@ void main() {
       'Should emit [Loading, Loaded] with empty list when no recommendations',
       build: () {
         when(mockGetMovieRecommendations.execute(tId))
-            .thenAnswer((_) async => Right([]));
+            .thenAnswer((_) async => const Right([]));
         return movieRecommendationsBloc;
       },
-      act: (bloc) => bloc.add(FetchMovieRecommendations(tId)),
+      act: (bloc) => bloc.add(const FetchMovieRecommendations(tId)),
       expect: () => [
         MovieRecommendationsLoading(),
-        MovieRecommendationsLoaded([]),
+        const MovieRecommendationsLoaded([]),
       ],
       verify: (_) {
         verify(mockGetMovieRecommendations.execute(tId)).called(1);
@@ -108,13 +108,13 @@ void main() {
       'Should emit [Loading, Error] when connection failure occurs',
       build: () {
         when(mockGetMovieRecommendations.execute(tId))
-            .thenAnswer((_) async => Left(ConnectionFailure('Connection Failure')));
+            .thenAnswer((_) async => const Left(ConnectionFailure('Connection Failure')));
         return movieRecommendationsBloc;
       },
-      act: (bloc) => bloc.add(FetchMovieRecommendations(tId)),
+      act: (bloc) => bloc.add(const FetchMovieRecommendations(tId)),
       expect: () => [
         MovieRecommendationsLoading(),
-        MovieRecommendationsError('Connection Failure'),
+        const MovieRecommendationsError('Connection Failure'),
       ],
     );
 
@@ -122,13 +122,13 @@ void main() {
       'Should emit [Loading, Error] when cache failure occurs',
       build: () {
         when(mockGetMovieRecommendations.execute(tId))
-            .thenAnswer((_) async => Left(DatabaseFailure('Cache Failure')));
+            .thenAnswer((_) async => const Left(DatabaseFailure('Cache Failure')));
         return movieRecommendationsBloc;
       },
-      act: (bloc) => bloc.add(FetchMovieRecommendations(tId)),
+      act: (bloc) => bloc.add(const FetchMovieRecommendations(tId)),
       expect: () => [
         MovieRecommendationsLoading(),
-        MovieRecommendationsError('Cache Failure'),
+        const MovieRecommendationsError('Cache Failure'),
       ],
     );
 
@@ -140,7 +140,7 @@ void main() {
         return movieRecommendationsBloc;
       },
       act: (bloc) {
-        bloc.add(FetchMovieRecommendations(tId));
+        bloc.add(const FetchMovieRecommendations(tId));
       },
       expect: () => [
         MovieRecommendationsLoading(),
@@ -174,20 +174,20 @@ void main() {
 
     test('MovieRecommendationsError should have correct props', () {
       const message = 'Error message';
-      final state = MovieRecommendationsError(message);
+      final state = const MovieRecommendationsError(message);
       expect(state.props, [message]);
     });
 
     test('MovieRecommendationsError with same message should be equal', () {
       const message = 'Error message';
-      final state1 = MovieRecommendationsError(message);
-      final state2 = MovieRecommendationsError(message);
+      final state1 = const MovieRecommendationsError(message);
+      final state2 = const MovieRecommendationsError(message);
       expect(state1, state2);
     });
 
     test('MovieRecommendationsError with different message should not be equal', () {
-      final state1 = MovieRecommendationsError('Error 1');
-      final state2 = MovieRecommendationsError('Error 2');
+      final state1 = const MovieRecommendationsError('Error 1');
+      final state2 = const MovieRecommendationsError('Error 2');
       expect(state1, isNot(state2));
     });
   });

@@ -18,6 +18,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomeTVSeriesPage extends StatefulWidget {
   static const ROUTE_NAME = '/tv-series';
 
+  const HomeTVSeriesPage({super.key});
+
   @override
   _HomeTVSeriesPageState createState() => _HomeTVSeriesPageState();
 }
@@ -41,33 +43,33 @@ class _HomeTVSeriesPageState extends State<HomeTVSeriesPage> {
           children: [
             UserAccountsDrawerHeader(
               currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('assets/circle-g.png'),
+                backgroundImage: const AssetImage('assets/circle-g.png'),
                 backgroundColor: Colors.grey.shade900,
               ),
-              accountName: Text('Ditonton'),
-              accountEmail: Text('ditonton@dicoding.com'),
+              accountName: const Text('Ditonton'),
+              accountEmail: const Text('ditonton@dicoding.com'),
               decoration: BoxDecoration(
                 color: Colors.grey.shade900,
               ),
             ),
             ListTile(
-              leading: Icon(Icons.movie),
-              title: Text('Movies'),
+              leading: const Icon(Icons.movie),
+              title: const Text('Movies'),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.pushNamed(context, '/home');
               },
             ),
             ListTile(
-              leading: Icon(Icons.tv),
-              title: Text('TV Series'),
+              leading: const Icon(Icons.tv),
+              title: const Text('TV Series'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: Icon(Icons.save_alt),
-              title: Text('Watchlist'),
+              leading: const Icon(Icons.save_alt),
+              title: const Text('Watchlist'),
               onTap: () {
                 Navigator.pushNamed(context, WatchlistTVSeriesPage.ROUTE_NAME);
               },
@@ -76,20 +78,20 @@ class _HomeTVSeriesPageState extends State<HomeTVSeriesPage> {
               onTap: () {
                 Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
               },
-              leading: Icon(Icons.info_outline),
-              title: Text('About'),
+              leading: const Icon(Icons.info_outline),
+              title: const Text('About'),
             ),
           ],
         ),
       ),
       appBar: AppBar(
-        title: Text('TV Series'),
+        title: const Text('TV Series'),
         actions: [
           IconButton(
             onPressed: () {
               Navigator.pushNamed(context, SearchTVSeriesPage.ROUTE_NAME);
             },
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
           )
         ],
       ),
@@ -107,7 +109,7 @@ class _HomeTVSeriesPageState extends State<HomeTVSeriesPage> {
               BlocBuilder<OnTheAirTvSeriesBloc, OnTheAirTvSeriesState>(
                 builder: (_, state) {
                   if (state is OnTheAirTvSeriesLoading) {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   } else if (state is OnTheAirTvSeriesLoaded) {
@@ -115,7 +117,7 @@ class _HomeTVSeriesPageState extends State<HomeTVSeriesPage> {
                   } else if (state is OnTheAirTvSeriesError) {
                     return Text(state.message);
                   } else {
-                    return SizedBox.shrink();
+                    return const SizedBox.shrink();
                   }
                 }
               ),
@@ -127,7 +129,7 @@ class _HomeTVSeriesPageState extends State<HomeTVSeriesPage> {
               BlocBuilder<PopularTvSeriesBloc, PopularTvSeriesState>(
                 builder: (_, state) {
                   if (state is PopularTvSeriesLoading) {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   } else if (state is PopularTvSeriesLoaded) {
@@ -135,7 +137,7 @@ class _HomeTVSeriesPageState extends State<HomeTVSeriesPage> {
                   } else if (state is PopularTvSeriesError) {
                     return Text(state.message);
                   } else {
-                    return SizedBox.shrink();
+                    return const SizedBox.shrink();
                   }
                 }
               ),
@@ -147,7 +149,7 @@ class _HomeTVSeriesPageState extends State<HomeTVSeriesPage> {
               BlocBuilder<TopRatedTvSeriesBloc, TopRatedTvSeriesState>(
                 builder: (_, state) {
                   if (state is TopRatedTvSeriesLoading) {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   } else if (state is TopRatedTvSeriesLoaded) {
@@ -155,7 +157,7 @@ class _HomeTVSeriesPageState extends State<HomeTVSeriesPage> {
                   } else if (state is TopRatedTvSeriesError) {
                     return Text(state.message);
                   } else {
-                    return SizedBox.shrink();
+                    return const SizedBox.shrink();
                   }
                 }
               ),
@@ -170,11 +172,11 @@ class _HomeTVSeriesPageState extends State<HomeTVSeriesPage> {
 class TVSeriesList extends StatelessWidget {
   final List<TVSeries> tvSeries;
 
-  TVSeriesList(this.tvSeries);
+  const TVSeriesList(this.tvSeries, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 200,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -191,13 +193,13 @@ class TVSeriesList extends StatelessWidget {
                 );
               },
               child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
                   imageUrl: '$BASE_IMAGE_URL${tv.posterPath}',
-                  placeholder: (context, url) => Center(
+                  placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),
                   ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
             ),

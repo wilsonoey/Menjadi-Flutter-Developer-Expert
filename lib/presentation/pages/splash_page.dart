@@ -5,7 +5,7 @@ import 'package:ditonton/presentation/pages/movie/home_movie_page.dart';
 class SplashPage extends StatefulWidget {
   static const ROUTE_NAME = '/splash';
 
-  const SplashPage({Key? key}) : super(key: key);
+  const SplashPage({super.key});
 
   @override
   State<SplashPage> createState() => _SplashPageState();
@@ -57,7 +57,7 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 Icons.movie_outlined,
                 size: 100,
                 color: kMikadoYellow,

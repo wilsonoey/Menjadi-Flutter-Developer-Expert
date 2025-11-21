@@ -20,13 +20,16 @@ class SslPinning {
   Future<void> init() async {
     try {
       _httpClient = HttpClient(context: await globalContext);
-      _httpClient!.badCertificateCallback =
-          (X509Certificate cert, String host, int port) => false;
+      _httpClient!.badCertificateCallback = testCertificate;
       _client = IOClient(_httpClient!);
     } catch (e) {
       print('Error initializing SSL pinning: $e');
       rethrow;
     }
+  }
+
+  static bool testCertificate(X509Certificate cert, String host, int port) {
+    return false;
   }
 
   Future<http.Client> getClient() async {
@@ -38,7 +41,7 @@ class SslPinning {
 
   Future<SecurityContext> get globalContext async {
     final sslCert = await rootBundle.load('assets/developer-themoviedb-org.pem');
-    SecurityContext securityContext = SecurityContext(withTrustedRoots: false);
+    final SecurityContext securityContext = SecurityContext(withTrustedRoots: false);
     securityContext.setTrustedCertificatesBytes(sslCert.buffer.asInt8List());
     return securityContext;
   }

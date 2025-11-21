@@ -8,7 +8,7 @@ class TVSeriesTable extends Equatable {
   final String? posterPath;
   final String? overview;
 
-  TVSeriesTable({
+  const TVSeriesTable({
     required this.id,
     required this.name,
     required this.posterPath,

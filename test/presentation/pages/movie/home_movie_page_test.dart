@@ -54,7 +54,7 @@ void main() {
     mockTopRatedMoviesBloc.close();
   });
 
-  Widget _makeTestableWidget(Widget body) {
+  Widget makeTestableWidget(Widget body) {
     return MaterialApp(
       home: MultiBlocProvider(
         providers: [
@@ -75,7 +75,7 @@ void main() {
 
   group('HomeMoviePage', () {
     testWidgets('displays AppBar with correct title', (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(HomeMoviePage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeMoviePage()));
 
       expect(find.text('Ditonton'), findsOneWidget);
       expect(find.byIcon(Icons.search), findsOneWidget);
@@ -83,7 +83,7 @@ void main() {
 
     testWidgets('displays drawer with correct menu items',
         (WidgetTester tester) async {
-      await tester.pumpWidget(_makeTestableWidget(HomeMoviePage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeMoviePage()));
 
       expect(find.byIcon(Icons.menu), findsOneWidget);
       await tester.tap(find.byIcon(Icons.menu));
@@ -102,7 +102,7 @@ void main() {
       when(mockNowPlayingMoviesBloc.stream)
           .thenAnswer((_) => Stream.fromIterable([NowPlayingMoviesLoading()]));
 
-      await tester.pumpWidget(_makeTestableWidget(HomeMoviePage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeMoviePage()));
 
       expect(find.byType(CircularProgressIndicator), findsWidgets);
     });
@@ -110,7 +110,7 @@ void main() {
     testWidgets('Now Playing section displays loaded state',
         (WidgetTester tester) async {
       final movies = [
-        Movie(
+        const Movie(
           backdropPath: '/path.jpg',
           genreIds: [1, 2],
           id: 1,
@@ -132,7 +132,7 @@ void main() {
       when(mockNowPlayingMoviesBloc.stream)
           .thenAnswer((_) => Stream.fromIterable([NowPlayingMoviesLoaded(movies)]));
 
-      await tester.pumpWidget(_makeTestableWidget(HomeMoviePage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeMoviePage()));
 
       expect(find.text('Now Playing'), findsOneWidget);
       expect(find.byType(ListView), findsWidgets);
@@ -141,11 +141,11 @@ void main() {
     testWidgets('Now Playing section displays error state',
         (WidgetTester tester) async {
       when(mockNowPlayingMoviesBloc.state)
-          .thenReturn(NowPlayingMoviesError('Error message'));
+          .thenReturn(const NowPlayingMoviesError('Error message'));
       when(mockNowPlayingMoviesBloc.stream)
-          .thenAnswer((_) => Stream.fromIterable([NowPlayingMoviesError('Error message')]));
+          .thenAnswer((_) => Stream.fromIterable([const NowPlayingMoviesError('Error message')]));
 
-      await tester.pumpWidget(_makeTestableWidget(HomeMoviePage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeMoviePage()));
 
       expect(find.text('Error message'), findsOneWidget);
     });
@@ -157,7 +157,7 @@ void main() {
       when(mockPopularMoviesBloc.stream)
           .thenAnswer((_) => Stream.fromIterable([PopularMoviesLoading()]));
 
-      await tester.pumpWidget(_makeTestableWidget(HomeMoviePage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeMoviePage()));
 
       expect(find.byType(CircularProgressIndicator), findsWidgets);
     });
@@ -165,7 +165,7 @@ void main() {
     testWidgets('Popular section displays loaded state',
         (WidgetTester tester) async {
       final movies = [
-        Movie(
+        const Movie(
           backdropPath: '/path.jpg',
           genreIds: [1, 2],
           id: 2,
@@ -187,7 +187,7 @@ void main() {
       when(mockPopularMoviesBloc.stream)
           .thenAnswer((_) => Stream.fromIterable([PopularMoviesLoaded(movies)]));
 
-      await tester.pumpWidget(_makeTestableWidget(HomeMoviePage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeMoviePage()));
 
       expect(find.text('Popular'), findsOneWidget);
     });
@@ -195,11 +195,11 @@ void main() {
     testWidgets('Popular section displays error state',
         (WidgetTester tester) async {
       when(mockPopularMoviesBloc.state)
-          .thenReturn(PopularMoviesError('Popular error'));
+          .thenReturn(const PopularMoviesError('Popular error'));
       when(mockPopularMoviesBloc.stream)
-          .thenAnswer((_) => Stream.fromIterable([PopularMoviesError('Popular error')]));
+          .thenAnswer((_) => Stream.fromIterable([const PopularMoviesError('Popular error')]));
 
-      await tester.pumpWidget(_makeTestableWidget(HomeMoviePage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeMoviePage()));
 
       expect(find.text('Popular error'), findsOneWidget);
     });
@@ -211,7 +211,7 @@ void main() {
       when(mockTopRatedMoviesBloc.stream)
           .thenAnswer((_) => Stream.fromIterable([TopRatedMoviesLoading()]));
 
-      await tester.pumpWidget(_makeTestableWidget(HomeMoviePage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeMoviePage()));
 
       expect(find.byType(CircularProgressIndicator), findsWidgets);
     });
@@ -219,7 +219,7 @@ void main() {
     testWidgets('Top Rated section displays loaded state',
         (WidgetTester tester) async {
       final movies = [
-        Movie(
+        const Movie(
           backdropPath: '/path.jpg',
           genreIds: [1, 2],
           id: 3,
@@ -241,7 +241,7 @@ void main() {
       when(mockTopRatedMoviesBloc.stream)
           .thenAnswer((_) => Stream.fromIterable([TopRatedMoviesLoaded(movies)]));
 
-      await tester.pumpWidget(_makeTestableWidget(HomeMoviePage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeMoviePage()));
 
       expect(find.text('Top Rated'), findsOneWidget);
     });
@@ -249,11 +249,11 @@ void main() {
     testWidgets('Top Rated section displays error state',
         (WidgetTester tester) async {
       when(mockTopRatedMoviesBloc.state)
-          .thenReturn(TopRatedMoviesError('Top rated error'));
+          .thenReturn(const TopRatedMoviesError('Top rated error'));
       when(mockTopRatedMoviesBloc.stream)
-          .thenAnswer((_) => Stream.fromIterable([TopRatedMoviesError('Top rated error')]));
+          .thenAnswer((_) => Stream.fromIterable([const TopRatedMoviesError('Top rated error')]));
 
-      await tester.pumpWidget(_makeTestableWidget(HomeMoviePage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeMoviePage()));
 
       expect(find.text('Top rated error'), findsOneWidget);
     });
@@ -261,7 +261,7 @@ void main() {
     testWidgets('TVSeriesList renders horizontal ListView',
         (WidgetTester tester) async {
       final movies = [
-        Movie(
+        const Movie(
           backdropPath: '/path.jpg',
           genreIds: [1],
           id: 1,
@@ -276,7 +276,7 @@ void main() {
           voteAverage: 8.0,
           voteCount: 100,
         ),
-        Movie(
+        const Movie(
           backdropPath: '/path2.jpg',
           genreIds: [2],
           id: 2,
@@ -298,7 +298,7 @@ void main() {
       when(mockNowPlayingMoviesBloc.stream)
           .thenAnswer((_) => Stream.fromIterable([NowPlayingMoviesLoaded(movies)]));
 
-      await tester.pumpWidget(_makeTestableWidget(HomeMoviePage()));
+      await tester.pumpWidget(makeTestableWidget(const HomeMoviePage()));
 
       expect(find.byType(ListView), findsWidgets);
       expect(find.byType(InkWell), findsWidgets);

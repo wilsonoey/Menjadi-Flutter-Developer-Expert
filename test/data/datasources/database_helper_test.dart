@@ -50,7 +50,7 @@ void main() {
       late MovieTable movieTable;
 
       setUp(() {
-        movieTable = MovieTable(
+        movieTable = const MovieTable(
           id: 1,
           title: 'Test Movie',
           overview: 'Test Overview',
@@ -83,7 +83,7 @@ void main() {
       test('getWatchlistMovies should return list of movies', () async {
         await databaseHelper.insertWatchlist(movieTable);
         
-        final movie2 = MovieTable(
+        final movie2 = const MovieTable(
           id: 2,
           title: 'Test Movie 2',
           overview: 'Test Overview 2',
@@ -124,7 +124,7 @@ void main() {
       late TVSeriesTable tvSeriesTable;
 
       setUp(() {
-        tvSeriesTable = TVSeriesTable(
+        tvSeriesTable = const TVSeriesTable(
           id: 1,
           name: 'Test TV Series',
           overview: 'Test Overview',
@@ -157,7 +157,7 @@ void main() {
       test('getWatchlistTVSeries should return list of tv series', () async {
         await databaseHelper.insertTVSeriesWatchlist(tvSeriesTable);
         
-        final tvSeries2 = TVSeriesTable(
+        final tvSeries2 = const TVSeriesTable(
           id: 2,
           name: 'Test TV Series 2',
           overview: 'Test Overview 2',

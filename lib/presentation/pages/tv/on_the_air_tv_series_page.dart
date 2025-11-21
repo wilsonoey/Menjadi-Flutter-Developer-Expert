@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class OnTheAirTVSeriesPage extends StatefulWidget {
   static const ROUTE_NAME = '/on-the-air-tv-series';
 
+  const OnTheAirTVSeriesPage({super.key});
+
   @override
   _OnTheAirTVSeriesPageState createState() => _OnTheAirTVSeriesPageState();
 }
@@ -23,14 +25,14 @@ class _OnTheAirTVSeriesPageState extends State<OnTheAirTVSeriesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('On The Air TV Series'),
+        title: const Text('On The Air TV Series'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<OnTheAirTvSeriesBloc, OnTheAirTvSeriesState>(
           builder: (_, state) {
             if (state is OnTheAirTvSeriesLoading) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             } else if (state is OnTheAirTvSeriesLoaded) {
@@ -43,11 +45,11 @@ class _OnTheAirTVSeriesPageState extends State<OnTheAirTVSeriesPage> {
               );
             } else if (state is OnTheAirTvSeriesError) {
               return Center(
-                key: Key('error_message'),
+                key: const Key('error_message'),
                 child: Text(state.message),
               );
             } else {
-              return SizedBox.shrink();
+              return const SizedBox.shrink();
             }
           },
         ),

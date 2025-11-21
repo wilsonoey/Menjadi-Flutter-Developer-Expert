@@ -2,7 +2,7 @@ import 'package:ditonton/domain/entities/tv/season.dart';
 import 'package:equatable/equatable.dart';
 
 class SeasonModel extends Equatable {
-  SeasonModel({
+  const SeasonModel({
     required this.airDate,
     required this.episodeCount,
     required this.id,
@@ -22,37 +22,37 @@ class SeasonModel extends Equatable {
 
   factory SeasonModel.fromJson(Map<String, dynamic> json) {
     return SeasonModel(
-      airDate: json["air_date"],
-      episodeCount: json["episode_count"],
-      id: json["id"],
-      name: json["name"],
-      overview: json["overview"],
-      posterPath: json["poster_path"],
-      seasonNumber: json["season_number"],
+      airDate: json['air_date'],
+      episodeCount: json['episode_count'],
+      id: json['id'],
+      name: json['name'],
+      overview: json['overview'],
+      posterPath: json['poster_path'],
+      seasonNumber: json['season_number'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      "air_date": airDate,
-      "episode_count": episodeCount,
-      "id": id,
-      "name": name,
-      "overview": overview,
-      "poster_path": posterPath,
-      "season_number": seasonNumber,
+      'air_date': airDate,
+      'episode_count': episodeCount,
+      'id': id,
+      'name': name,
+      'overview': overview,
+      'poster_path': posterPath,
+      'season_number': seasonNumber,
     };
   }
 
   Season toEntity() {
     return Season(
-      airDate: this.airDate,
-      episodeCount: this.episodeCount,
-      id: this.id,
-      name: this.name,
-      overview: this.overview,
-      posterPath: this.posterPath,
-      seasonNumber: this.seasonNumber,
+      airDate: airDate,
+      episodeCount: episodeCount,
+      id: id,
+      name: name,
+      overview: overview,
+      posterPath: posterPath,
+      seasonNumber: seasonNumber,
     );
   }
 

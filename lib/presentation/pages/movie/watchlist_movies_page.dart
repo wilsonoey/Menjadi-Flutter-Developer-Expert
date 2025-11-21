@@ -9,6 +9,8 @@ import 'package:provider/provider.dart';
 class WatchlistMoviesPage extends StatefulWidget {
   static const ROUTE_NAME = '/watchlist-movie';
 
+  const WatchlistMoviesPage({super.key});
+
   @override
   _WatchlistMoviesPageState createState() => _WatchlistMoviesPageState();
 }
@@ -29,16 +31,17 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
     routeObserver.subscribe(this, ModalRoute.of(context)!);
   }
 
+  @override
   void didPopNext() {
     BlocProvider.of<WatchlistMoviesBloc>(context, listen: false)
-      ..add(FetchWatchlistMovies());
+      .add(FetchWatchlistMovies());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Watchlist'),
+        title: const Text('Watchlist'),
       ),
       body: Provider(
         create: (_) => BlocProvider<WatchlistMoviesBloc>(
@@ -49,7 +52,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
           child: BlocBuilder<WatchlistMoviesBloc, WatchlistMoviesState>(
             builder: (_, state) {
               if (state is WatchlistMoviesLoading) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               } else if (state is WatchlistMoviesLoaded) {
@@ -62,11 +65,11 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
                 );
               } else if (state is WatchlistMoviesError) {
                 return Center(
-                  key: Key('error_message'),
+                  key: const Key('error_message'),
                   child: Text(state.message),
                 );
               } else {
-                return SizedBox.shrink();
+                return const SizedBox.shrink();
               }
             },
           ),

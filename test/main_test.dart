@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/ssl_pinning.dart';
 import 'package:ditonton/common/utils.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart';
+
+class MockX509Certificate extends Fake implements X509Certificate {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -27,6 +30,8 @@ void main() {
 
     tearDown(() {
       SslPinning.resetForTesting();
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMessageHandler('flutter/assets', null);
     });
 
     group('init()', () {
@@ -50,6 +55,27 @@ void main() {
         final client = SslPinning.clientForTesting;
         expect(client, isA<http.Client>());
         expect(client, isA<IOClient>());
+      });
+
+      test('should return false when badCertificateCallback is called', () async {
+        final result = SslPinning.testCertificate(
+          MockX509Certificate(), 
+          'localhost', 
+          8080
+        );
+        
+        expect(result, false);
+      });
+
+      test('should log error and rethrow when initialization fails', () async {
+        // Mock the asset loading to throw an exception to trigger the catch block (line 27)
+        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+            .setMockMessageHandler('flutter/assets', (message) {
+          throw Exception('Simulated Asset Load Error');
+        });
+
+        // Expect the init method to rethrow the exception
+        expect(() => sslPinning.init(), throwsA(isA<Exception>()));
       });
     });
 

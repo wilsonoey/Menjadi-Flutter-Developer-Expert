@@ -6,8 +6,8 @@ import 'package:ditonton/domain/entities/movie/genre.dart';
 
 void main() {
   group('MovieDetailResponse', () {
-    final tGenreModel = GenreModel(id: 28, name: 'Action');
-    final tGenreEntity = Genre(id: 28, name: 'Action');
+    final tGenreModel = const GenreModel(id: 28, name: 'Action');
+    final tGenreEntity = const Genre(id: 28, name: 'Action');
 
     final tMovieDetailResponse = MovieDetailResponse(
       adult: false,
@@ -58,27 +58,27 @@ void main() {
 
     test('should convert JSON to MovieDetailResponse', () {
       final jsonMap = {
-        "adult": false,
-        "backdrop_path": "/backdrop.jpg",
-        "budget": 100000000,
-        "genres": [{"id": 28, "name": "Action"}],
-        "homepage": "https://example.com",
-        "id": 550,
-        "imdb_id": "tt0137523",
-        "original_language": "en",
-        "original_title": "Fight Club",
-        "overview": "An insomniac office worker and a devil-may-care soap maker form an underground fight club.",
-        "popularity": 25.5,
-        "poster_path": "/poster.jpg",
-        "release_date": "1999-10-15",
-        "revenue": 100853753,
-        "runtime": 139,
-        "status": "Released",
-        "tagline": "Mischief. Mayhem. Soap.",
-        "title": "Fight Club",
-        "video": false,
-        "vote_average": 8.8,
-        "vote_count": 26280,
+        'adult': false,
+        'backdrop_path': '/backdrop.jpg',
+        'budget': 100000000,
+        'genres': [{'id': 28, 'name': 'Action'}],
+        'homepage': 'https://example.com',
+        'id': 550,
+        'imdb_id': 'tt0137523',
+        'original_language': 'en',
+        'original_title': 'Fight Club',
+        'overview': 'An insomniac office worker and a devil-may-care soap maker form an underground fight club.',
+        'popularity': 25.5,
+        'poster_path': '/poster.jpg',
+        'release_date': '1999-10-15',
+        'revenue': 100853753,
+        'runtime': 139,
+        'status': 'Released',
+        'tagline': 'Mischief. Mayhem. Soap.',
+        'title': 'Fight Club',
+        'video': false,
+        'vote_average': 8.8,
+        'vote_count': 26280,
       };
 
       final result = MovieDetailResponse.fromJson(jsonMap);
@@ -90,27 +90,27 @@ void main() {
       final result = tMovieDetailResponse.toJson();
 
       final expectedJsonMap = {
-        "adult": false,
-        "backdrop_path": "/backdrop.jpg",
-        "budget": 100000000,
-        "genres": [{"id": 28, "name": "Action"}],
-        "homepage": "https://example.com",
-        "id": 550,
-        "imdb_id": "tt0137523",
-        "original_language": "en",
-        "original_title": "Fight Club",
-        "overview": "An insomniac office worker and a devil-may-care soap maker form an underground fight club.",
-        "popularity": 25.5,
-        "poster_path": "/poster.jpg",
-        "release_date": "1999-10-15",
-        "revenue": 100853753,
-        "runtime": 139,
-        "status": "Released",
-        "tagline": "Mischief. Mayhem. Soap.",
-        "title": "Fight Club",
-        "video": false,
-        "vote_average": 8.8,
-        "vote_count": 26280,
+        'adult': false,
+        'backdrop_path': '/backdrop.jpg',
+        'budget': 100000000,
+        'genres': [{'id': 28, 'name': 'Action'}],
+        'homepage': 'https://example.com',
+        'id': 550,
+        'imdb_id': 'tt0137523',
+        'original_language': 'en',
+        'original_title': 'Fight Club',
+        'overview': 'An insomniac office worker and a devil-may-care soap maker form an underground fight club.',
+        'popularity': 25.5,
+        'poster_path': '/poster.jpg',
+        'release_date': '1999-10-15',
+        'revenue': 100853753,
+        'runtime': 139,
+        'status': 'Released',
+        'tagline': 'Mischief. Mayhem. Soap.',
+        'title': 'Fight Club',
+        'video': false,
+        'vote_average': 8.8,
+        'vote_count': 26280,
       };
 
       expect(result, expectedJsonMap);
